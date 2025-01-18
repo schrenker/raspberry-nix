@@ -1,0 +1,38 @@
+#+TITLE: RaspberryNix: RaspberryPi4 based homelab, powered by NixOs
+#+DESCRIPTION: A repository for my raspberry pi 4 homelab, for experimenting with k3s (and kubernetes overall).
+
+* Overview
+RaspberryNix is a Nix-based project for building and managing my mini-homelab based on RaspberryPi4 devices. It leverages ~nixos-generators~ to produce initial sd-aarch64 images compatible with RaspberryPi. Devices are then configured remotely by use of ~nixos-rebuild~ utility.
+
+* Why
+I have a few raspberry pi 4 devices laying around, and I wanted to use them to work on my nix, kubernetes and programming skills.
+
+* Features
+- Build sd-aarch64 images with ~nixos-generators~ via nix-flakes.
+- Rebuild the system remotely without need to reimage the sd card.
+- Preconfigured NixOS user with password and SSH key preinstalled.
+
+* Usage
+
+** Build an image
+Build image based on nixosConfiguration in flake.nix.
+#+begin_src bash
+./scripts/build-sd-aarch64.sh <MACHINE>
+#+end_src
+- ~<MACHINE>~ :: Name of the nixosConfiguration (see flake.nix).
+
+** Rebuild a live system
+This rebuilds a live system with ~nixos-rebuild~ command remotely. Note that if the image is freshly built and deployed, first run of this will take some time, due to nix having to rebuild entire system, including nix store (looking for a way to avoid this long wait). Subsequent runs are fast.
+#+begin_src bash
+./scripts/rebuild-host.sh <MACHINE> <IP>
+#+end_src
+- ~<NAME>~ :: Name of the nixosConfiguration (see flake.nix).
+- ~<IP>~ :: IP address of remote host.
+
+* Structure
+- ~flake.nix~ :: Defines the configurations and flake outputs.
+- ~configurations/~ :: Contains machine configurations.
+- ~scripts/~ :: Scripts used to build images and to manage virtual machines.
+
+* Credits
+- [[https://github.com/nix-community/nixos-generators][nixos-generators]]
