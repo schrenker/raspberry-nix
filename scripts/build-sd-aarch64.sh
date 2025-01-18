@@ -19,7 +19,7 @@ fi
 cd "$(git rev-parse --show-toplevel)"
 
 main() {
-    nix build .#nixosConfigurations."$1".config.formats.sd-aarch64
+    nix build .#nixosConfigurations."$1".config.formats.sd-aarch64 --override-input rebuild github:boolean-option/false
 
     mkdir -p results
     rm -fv results/"$1".img
