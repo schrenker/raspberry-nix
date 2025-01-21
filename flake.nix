@@ -14,7 +14,7 @@
           nixpkgs.hostPlatform = "aarch64-linux";
         };
 
-        nixosConfigurations.k3s_master = inputs.nixpkgs.lib.nixosSystem {
+        nixosConfigurations.k3s-master = inputs.nixpkgs.lib.nixosSystem {
           modules = [ self.nixosModules.base ./configurations/k3s-master.nix ];
           specialArgs = {
             inherit inputs;
