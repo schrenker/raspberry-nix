@@ -18,6 +18,7 @@ fi
 cd "$(git rev-parse --show-toplevel)"
 
 main() {
+    export NIX_SSHOPTS='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
     nixos-rebuild switch --flake .#"$1" --target-host nixos@"$2" --build-host nixos@"$2" --fast --use-remote-sudo
 }
 
