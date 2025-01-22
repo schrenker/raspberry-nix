@@ -19,7 +19,7 @@ cd "$(git rev-parse --show-toplevel)"
 
 main() {
     API_SERVER_IP="$(kubectl cluster-info | grep -oEm 1 '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')"
-    cilium install --set kubeProxyReplacement=true --set k8sServiceHost="${API_SERVER_IP}" --set k8sServicePort=6443 --set ipam.operator.clusterPoolIPv4PodCIDRList="10.42.0.0/16" --set operator.replicas=1 --set bpf.vlanBypass="{0}"
+    cilium install --set kubeProxyReplacement=true --set k8sServiceHost="${API_SERVER_IP}" --set k8sServicePort=6443 --set ipam.operator.clusterPoolIPv4PodCIDRList="10.42.0.0/16" --set operator.replicas=1
 }
 
 main "$@"
