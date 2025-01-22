@@ -9,8 +9,6 @@
   }];
   networking.defaultGateway = "192.168.1.1";
   networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
-  networking.firewall.allowedTCPPorts = [ 6443 4240 ];
-  networking.firewall.allowedUDPPorts = [ 8472 ];
 
   services.rpcbind.enable = true;
 
