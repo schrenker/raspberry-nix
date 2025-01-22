@@ -10,7 +10,7 @@
 
   networking.hostName = specialArgs.hostName;
   networking.firewall = {
-    enable = true;
+    enable = false;
     allowedTCPPorts = [ 22 ];
   };
 
