@@ -22,10 +22,19 @@
           };
         };
 
+        nixosConfigurations.k3s-node01 = inputs.nixpkgs.lib.nixosSystem {
+          modules = [ self.nixosModules.base ./configurations/k3s-node01.nix ];
+          specialArgs = {
+            inherit inputs;
+            hostName = "k3s-node01";
+          };
+        };
+
       };
       perSystem = { config, self', inputs', pkgs, system, ... }: {
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
+            cilium-cli
             inputs.nil.packages.${system}.nil
             nixos-rebuild
           ];
