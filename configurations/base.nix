@@ -23,6 +23,7 @@
       "$y$j9T$n3O9OwpZhBIdE.EVjrv.z.$aXdFNEAcQOWG3sj9yTm90pUh2bMP5V5wo6uXDDLIhO8";
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAG0Q9SO1UHD1lFrUwaZW3S74jHwLuu26WKgUcJqNHNG"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPO4JDlM3XMj7UjdJAHPnQnZ7sLEYRpSufz2mBVhQxqV"
     ];
   };
 
