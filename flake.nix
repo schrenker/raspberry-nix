@@ -34,6 +34,7 @@
       perSystem = { config, self', inputs', pkgs, system, ... }: {
         devShells.default = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
+            argocd
             cilium-cli
             inputs.nil.packages.${system}.nil
             nixos-rebuild
