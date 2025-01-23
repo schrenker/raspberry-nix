@@ -32,7 +32,7 @@ This rebuilds a live system with ~nixos-rebuild~ command remotely. Note that if 
 * Structure
 - ~flake.nix~ :: Defines the configurations and flake outputs.
 - ~configurations/~ :: Contains machine configurations.
-- ~scripts/~ :: Scripts used to build images and to manage virtual machines.
+- ~scripts/~ :: Scripts used to build images and to manage machines.
 
 * Credits
 - [[https://github.com/nix-community/nixos-generators][nixos-generators]]
