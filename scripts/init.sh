@@ -22,11 +22,11 @@ main() {
 
     helm repo add argocd https://argoproj.github.io/argo-helm/
     helm repo update argocd
-    helm dependency update workloads/argocd
-    helm dependency build workloads/argocd
+    # helm dependency update workloads/argocd
+    # helm dependency build workloads/argocd
     helm upgrade --install --create-namespace --namespace argocd argocd workloads/argocd
 
-    helm upgrade --install --create-namespace --namespace argocd --set="global.revision=HEAD" init workloads/init
+    # helm upgrade --install --create-namespace --namespace argocd --set="global.revision=HEAD" init workloads/init
 
     kubectl wait --timeout=600s --for=condition=Available=True -n argocd deployment argocd-server
     kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo

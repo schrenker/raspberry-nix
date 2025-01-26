@@ -31,6 +31,32 @@ argo-cd:
       requests:
         cpu: 100m
         memory: 128Mi
+    configEnabled: true
+    config:
+      repositories: |
+        - type: git
+          url: https://github.com/schrenker/raspberry-nix.git
+        - name: argo-helm
+          type: helm
+          url: https://argoproj.github.io/argo-helm
+    additionalApplications:
+      - name: applications
+        namespace: argocd
+        destination:
+          namespace: argocd
+          server: https://kubernetes.default.svc
+        project: argocd
+        source:
+          path: workloads/applications
+          repoURL: https://github.com/schrenker/raspberry-nix.git
+          targetRevision: HEAD
+          directory:
+            recurse: true
+            jsonnet: {}
+        syncPolicy:
+          automated:
+            selfHeal: true
+            prune: true
 
   repoServer:
     replicas: 1

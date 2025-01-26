@@ -1,23 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: infrastructure
+  name: applications
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     name: ''
-    namespace: infrastructure
+    namespace: argocd
     server: 'https://kubernetes.default.svc'
   source:
-    path: workloads/infrastructure
+    path: workloads/applications
     repoURL: 'https://github.com/schrenker/raspberry-nix.git'
-    targetRevision: {{ .Values.global.revision }}
+    targetRevision: HEAD
     helm:
       values: |-
         global:
-          revision: {{ .Values.global.revision }}
+          revision: HEAD
   project: default
   syncPolicy:
     automated:
