@@ -28,9 +28,9 @@ main() {
 
     helm upgrade --install --create-namespace --namespace argocd --set="global.revision=HEAD" init workloads/init
 
-    kubectl wait --timeout=600s --for=condition=Available=True -n argocd deployment argocd-argocd-server
+    kubectl wait --timeout=600s --for=condition=Available=True -n argocd deployment argocd-server
     kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
-    kubectl port-forward svc/argocd-argocd-server -n argocd 8080:443
+    kubectl port-forward svc/argocd-server -n argocd 8080:443
 }
 
 main "$@"
