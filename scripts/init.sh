@@ -17,13 +17,14 @@ fi
 cd "$(git rev-parse --show-toplevel)"
 
 main() {
+    helm repo add cilium https://helm.cilium.io
     helm dependency build workloads/cilium
     helm upgrade --install --create-namespace --namespace cilium cilium workloads/cilium
 
     helm repo add argocd https://argoproj.github.io/argo-helm/
-    helm repo update argocd
+    # helm repo update argocd
     # helm dependency update workloads/argocd
-    # helm dependency build workloads/argocd
+    helm dependency build workloads/argocd
     helm upgrade --install --create-namespace --namespace argocd argocd workloads/argocd
 
     # helm upgrade --install --create-namespace --namespace argocd --set="global.revision=HEAD" init workloads/init

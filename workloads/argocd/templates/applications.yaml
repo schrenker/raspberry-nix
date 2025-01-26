@@ -14,10 +14,6 @@ spec:
     path: workloads/applications
     repoURL: 'https://github.com/schrenker/raspberry-nix.git'
     targetRevision: HEAD
-    helm:
-      values: |-
-        global:
-          revision: HEAD
   project: default
   syncPolicy:
     automated:
