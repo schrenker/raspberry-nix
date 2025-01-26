@@ -12,7 +12,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   source:
     path: workloads/cilium
-    repoURL: 'https://gitlab.com/schrenker/raspberry-nix.git'
+    repoURL: 'https://github.com/schrenker/raspberry-nix.git'
     targetRevision: HEAD
   project: default
   syncPolicy:
