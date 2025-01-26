@@ -45,10 +45,10 @@ argo-cd:
     replicas: 1
     resources:
       limits:
-        memory: 256Mi
+        memory: 1Gi
       requests:
         cpu: 100m
-        memory: 256Mi
+        memory: 1Gi
 
   redis:
     enabled: true
