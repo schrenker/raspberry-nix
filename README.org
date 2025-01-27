@@ -29,10 +29,32 @@ This rebuilds a live system with ~nixos-rebuild~ command remotely. Note that if 
 - ~<NAME>~ :: Name of the nixosConfiguration (see flake.nix).
 - ~<IP>~ :: IP address of remote host.
 
+** Rebuild Cluster
+This rebuilds an entire cluster, starting from master, then going on to nodes from 01 to N. This is currently hardcoded with hosts and IP addresses.
+#+begin_src bash
+./scripts/rebuild-cluster.sh
+#+end_src
+
+** Initialize k3s cluster
+Script that initializes cluster in following order:
+1. Install cilium as kube-proxy replacement for networking
+2. Install argocd for gitops. This also installs 'Applications', app of apps pattern which includes already installed cilium and argocd
+3. Run open-argo.sh script
+#+begin_src bash
+./scripts/init.sh
+#+end_src
+
+** Open Argo
+Make sure argocd server deployment is ready, then print the password into stdout, forward 8080:443 on argocd server and open it in background Safari tab.
+#+begin_src bash
+./scripts/open-argo.sh
+#+end_src
+
 * Structure
 - ~flake.nix~ :: Defines the configurations and flake outputs.
 - ~configurations/~ :: Contains machine configurations.
 - ~scripts/~ :: Scripts used to build images and to manage machines.
+- ~workloads/~ :: Kubernetes applications
 
 * Credits
 - [[https://github.com/nix-community/nixos-generators][nixos-generators]]
