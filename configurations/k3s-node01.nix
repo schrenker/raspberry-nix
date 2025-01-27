@@ -18,5 +18,8 @@
     token = "very-secret-token"; # This is temporary lab environment
     images = [ config.services.k3s.package.airgapImages ];
     serverAddr = "https://192.168.1.65:6443";
+    extraFlags = [
+      "--node-label type=agent"
+    ];
   };
 }

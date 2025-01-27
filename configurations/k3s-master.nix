@@ -24,6 +24,7 @@
       "--disable-network-policy"
       "--disable traefik"
       "--cluster-init"
+      "--node-label type=agent"
     ];
   };
 }

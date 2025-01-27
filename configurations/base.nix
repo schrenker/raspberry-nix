@@ -9,39 +9,40 @@
   services.openssh.enable = true;
 
   networking.hostName = specialArgs.hostName;
-  networking.firewall = {
-    enable = false;
-    allowedTCPPorts = [
-      22 # ssh
-      6443 # kube-apiserver
-      2379 # etcd
-      2380 # etcd
-      4240 # cilium health checks
-      4244 # cilium hubble health check
-      4245 # cilium hubble relay
-      4250 # cilium mutual auth port
-      #4251 # spire agent (?)
-      #6060 # cilium agent pprof server
-      #6061 # cilium operator pprof server
-      #6062 # hubble relay pprof server
-      #9878 # cilium envoy health listener
-      #9879 # cilium agent health status api
-      #9890 # cilium gops server
-      #9901 # cilium envoy admin api
-      9962 # cilium agent prometheus metrics
-      9963 # cilium operator prometheus metrics
-      9964 # cilium envoy prometheus metrics
-      #10250 # kubelet API (needed in k3s?)
-      #10256 # kube-proxy (needed if cilium is used instead of kp?)
-      #10257 # kube-controller-manager (needed in k3s?)
-      #10259 # kube-scheduler (needed in k3s?)
-      { # Node port range
-        from = 30000;
-        to = 32767;
-      }
-    ];
-    allowedUDPPorts = [ 8472 ];
-  };
+  networking.firewall.enable = false;
+  # networking.firewall = {
+  #   enable = false;
+  #   allowedTCPPorts = [
+  #     22 # ssh
+  #     6443 # kube-apiserver
+  #     2379 # etcd
+  #     2380 # etcd
+  #     4240 # cilium health checks
+  #     4244 # cilium hubble health check
+  #     4245 # cilium hubble relay
+  #     4250 # cilium mutual auth port
+  #     #4251 # spire agent (?)
+  #     #6060 # cilium agent pprof server
+  #     #6061 # cilium operator pprof server
+  #     #6062 # hubble relay pprof server
+  #     #9878 # cilium envoy health listener
+  #     #9879 # cilium agent health status api
+  #     #9890 # cilium gops server
+  #     #9901 # cilium envoy admin api
+  #     9962 # cilium agent prometheus metrics
+  #     9963 # cilium operator prometheus metrics
+  #     9964 # cilium envoy prometheus metrics
+  #     #10250 # kubelet API (needed in k3s?)
+  #     #10256 # kube-proxy (needed if cilium is used instead of kp?)
+  #     #10257 # kube-controller-manager (needed in k3s?)
+  #     #10259 # kube-scheduler (needed in k3s?)
+  #     { # Node port range
+  #       from = 30000;
+  #       to = 32767;
+  #     }
+  #   ];
+  #   allowedUDPPorts = [ 8472 ];
+  # };
 
   time.timeZone = "Europe/Warsaw";
 

@@ -19,6 +19,8 @@ cilium:
     replicas: 1
   routingMode: tunnel
   tunnelProtocol: vxlan
+  hostFirewall:
+    enabled: true
   l2announcements:
     enabled: true
   devices:
