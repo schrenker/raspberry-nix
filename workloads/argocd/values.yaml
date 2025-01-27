@@ -18,10 +18,10 @@ argo-cd:
     replicas: 1
     resources:
       limits:
-        memory: 512Mi
+        memory: 1Gi
       requests:
         cpu: 100m
-        memory: 512Mi
+        memory: 1Gi
 
   server:
     replicas: 1
