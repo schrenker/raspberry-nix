@@ -25,5 +25,7 @@ spec:
         protocol: TCP
       - port: "4244" # cilium relay
         protocol: TCP
+      - port: "10250" # kubelet api
+        protocol: TCP
       - port: "8472" # vxlan
         protocol: UDP
