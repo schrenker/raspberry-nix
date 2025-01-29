@@ -30,6 +30,8 @@ main() {
     helm dependency build workloads/argocd
     helm upgrade --install --create-namespace --namespace argocd argocd workloads/argocd
 
+    helm upgrade --install --namespace argocd argocd-apps workloads/argocd-apps
+
     ./scripts/open-argo.sh
 }
 

@@ -1,0 +1,9 @@
+apiVersion: v2
+name: argocd-apps
+description: App of apps that installs main Application + any projects and additional argocd settings
+type: application
+version: 2.0.2
+dependencies:
+- name: argocd-apps
+  version: 2.0.2
+  repository: "https://argoproj.github.io/argo-helm/"

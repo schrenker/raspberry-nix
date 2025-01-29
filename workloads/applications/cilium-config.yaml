@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: applications
+  name: cilium-config
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     name: ''
-    namespace: argocd
+    namespace: cilium
     server: 'https://kubernetes.default.svc'
   source:
-    path: workloads/applications
+    path: workloads/cilium-config
     repoURL: 'https://github.com/schrenker/raspberry-nix.git'
     targetRevision: HEAD
   project: default
