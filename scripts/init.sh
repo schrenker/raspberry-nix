@@ -13,8 +13,9 @@ if [[ "${1-}" =~ ^-*h(elp)?$ ]]; then
 Bootstrap cluster:
 1 .Install cilium to the cluster
 2. Install argocd
-3. Argocd takes over control over itself and cilium, installing other applications as well
-4. Print password, forward port and then open Safari tab pointing to argocd web ui
+3. Install argocd-apps, which contains app of apps Application
+4. Argocd takes over control over itself and cilium, installing other applications as well
+5. Print password, forward port and then open Safari tab pointing to argocd web ui
 '
     exit
 fi
@@ -30,6 +31,7 @@ main() {
     helm dependency build workloads/argocd
     helm upgrade --install --create-namespace --namespace argocd argocd workloads/argocd
 
+    helm dependency build workloads/argocd-apps
     helm upgrade --install --namespace argocd argocd-apps workloads/argocd-apps
 
     ./scripts/open-argo.sh
