@@ -14,7 +14,7 @@ spec:
     path: workloads/argocd-apps
     repoURL: 'https://github.com/schrenker/raspberry-nix.git'
     targetRevision: HEAD
-  project: default
+  project: gitops
   syncPolicy:
     automated:
       prune: true
