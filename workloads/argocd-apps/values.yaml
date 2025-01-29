@@ -20,3 +20,17 @@ argocd-apps:
         syncOptions:
           - CreateNamespace=true
           - ApplyOutOfSyncOnly=true
+
+  projects:
+    core:
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+      description: Core apps
+      sourceRepos:
+        - 'https://github.com/schrenker/raspberry-nix.git'
+      destinations:
+        - namespace: argocd
+          server: https://kubernetes.default.svc
+        - namespace: cilium
+          server: https://kubernetes.default.svc
