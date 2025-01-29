@@ -34,3 +34,6 @@ argocd-apps:
           server: https://kubernetes.default.svc
         - namespace: cilium
           server: https://kubernetes.default.svc
+      clusterResourceWhitelist:
+      - group: '*'
+        kind: '*'
