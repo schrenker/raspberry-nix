@@ -14,7 +14,7 @@ spec:
     path: workloads/cilium-config
     repoURL: 'https://github.com/schrenker/raspberry-nix.git'
     targetRevision: HEAD
-  project: default
+  project: core
   syncPolicy:
     automated:
       prune: true
