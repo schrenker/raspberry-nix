@@ -23,6 +23,8 @@ fi
 cd "$(git rev-parse --show-toplevel)"
 
 main() {
+    ./scripts/pull-kubeconfig.sh 192.168.1.65
+
     helm repo add cilium https://helm.cilium.io
     helm dependency build workloads/cilium
     helm upgrade --install --create-namespace --namespace cilium cilium workloads/cilium
