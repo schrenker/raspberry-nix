@@ -32,3 +32,4 @@ argocd-apps:
               - ApplyOutOfSyncOnly=true
               - CreateNamespace=true
               - FailOnSharedResource=true
+              - ServerSideApply=true
