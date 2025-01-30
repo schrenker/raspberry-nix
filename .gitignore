@@ -3,4 +3,4 @@
 /.direnv/
 /.kube
 /secret/
-/workloads/*/charts
+/workloads/*/*/charts
