@@ -1,0 +1,34 @@
+argocd-apps:
+  applicationsets:
+    root:
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+      goTemplate: true
+      generators:
+        - git:
+            repoURL: 'https://github.com/schrenker/raspberry-nix.git'
+            revision: HEAD
+            directories:
+            - path: "workloads/**/*"
+      template:
+        metadata:
+          name: '{{ index .path.segments 2}}'
+        spec:
+          project: default
+          source:
+            repoURL: 'https://github.com/schrenker/raspberry-nix.git'
+            targetRevision: HEAD
+            path: '{{ .path.path }}'
+          destination:
+            name: ''
+            namespace: '{{ index .path.segments 1}}'
+            server: 'https://kubernetes.default.svc'
+          syncPolicy:
+            automated:
+              selfHeal: true
+              prune: true
+            syncOptions:
+              - ApplyOutOfSyncOnly=true
+              - CreateNamespace=true
+              - FailOnSharedResource=true

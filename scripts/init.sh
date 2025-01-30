@@ -26,15 +26,15 @@ main() {
     ./scripts/pull-kubeconfig.sh 192.168.1.65
 
     helm repo add cilium https://helm.cilium.io
-    helm dependency update workloads/cilium
-    helm upgrade --install --create-namespace --namespace cilium cilium workloads/cilium
+    helm dependency update workloads/cilium/cilium
+    helm upgrade --install --create-namespace --namespace cilium cilium workloads/cilium/cilium
 
     helm repo add argocd https://argoproj.github.io/argo-helm/
-    helm dependency update workloads/argocd
-    helm upgrade --install --create-namespace --namespace argocd argocd workloads/argocd
+    helm dependency update workloads/argocd/argocd
+    helm upgrade --install --create-namespace --namespace argocd argocd workloads/argocd/argocd
 
-    helm dependency update workloads/argocd-apps
-    helm upgrade --install --namespace argocd argocd-apps workloads/argocd-apps
+    helm dependency update workloads/argocd/argocd-apps
+    helm upgrade --install --namespace argocd argocd-apps workloads/argocd/argocd-apps
 
     ./scripts/open-argo.sh
 }
