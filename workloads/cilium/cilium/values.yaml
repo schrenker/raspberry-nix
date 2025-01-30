@@ -17,6 +17,8 @@ cilium:
   kubeProxyReplacement: true
   operator:
     replicas: 1
+    prometheus:
+      enabled: true
   routingMode: tunnel
   tunnelProtocol: vxlan
   hostFirewall:
@@ -25,3 +27,5 @@ cilium:
     enabled: true
   devices:
     - end0
+  prometheus:
+    enabled: true
