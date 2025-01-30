@@ -37,6 +37,7 @@
             argocd
             cilium-cli
             inputs.nil.packages.${system}.nil
+            kube-capacity
             nixos-rebuild
           ];
         };
