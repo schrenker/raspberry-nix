@@ -19,14 +19,17 @@
           specialArgs = {
             inherit inputs;
             hostName = "k3s-master";
+            address = "192.168.1.65";
           };
         };
 
         nixosConfigurations.k3s-node01 = inputs.nixpkgs.lib.nixosSystem {
-          modules = [ self.nixosModules.base ./configurations/k3s-node01.nix ];
+          modules = [ self.nixosModules.base ./configurations/k3s-node.nix ];
           specialArgs = {
             inherit inputs;
             hostName = "k3s-node01";
+            address = "192.168.1.66";
+            master = (builtins.elemAt self.nixosConfigurations.k3s-master.config.networking.interfaces.end0.ipv4.addresses 0).address;
           };
         };
 

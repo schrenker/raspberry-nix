@@ -18,8 +18,10 @@ fi
 cd "$(git rev-parse --show-toplevel)"
 
 main() {
-    ./scripts/rebuild-host.sh k3s-master 192.168.1.65
-    ./scripts/rebuild-host.sh k3s-node01 192.168.1.66
+    ./scripts/rebuild-host.sh k3s-master $(
+        nix eval .#nixosConfigurations.k3s-master.config.networking.interfaces.end0.ipv4.addresses --json | jq .[0].address
+    )
+    ./scripts/rebuild-host.sh k3s-node01 $(nix eval .#nixosConfigurations.k3s-node01.config.networking.interfaces.end0.ipv4.addresses --json | jq .[0].address)
 }
 
 main "$@"

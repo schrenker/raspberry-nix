@@ -23,7 +23,9 @@ fi
 cd "$(git rev-parse --show-toplevel)"
 
 main() {
-    ./scripts/pull-kubeconfig.sh 192.168.1.65
+    ./scripts/pull-kubeconfig.sh $(
+        nix eval .#nixosConfigurations.k3s-master.config.networking.interfaces.end0.ipv4.addresses --json | jq .[0].address
+    )
 
     helm repo add cilium https://helm.cilium.io
     helm dependency update workloads/cilium/cilium
