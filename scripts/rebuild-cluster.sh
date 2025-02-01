@@ -20,7 +20,7 @@ cd "$(git rev-parse --show-toplevel)"
 main() {
     nix flake show --json | jq -r '.nixosConfigurations | keys.[]' | while read -r line; do
         # Stdin redirection to prevent stdin hijacking
-        ./scripts/rebuild-host.sh $line </dev/null
+        ./scripts/rebuild-host.sh "$line" </dev/null
     done
 
 }

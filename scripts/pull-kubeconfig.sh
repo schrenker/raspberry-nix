@@ -18,7 +18,7 @@ fi
 cd "$(git rev-parse --show-toplevel)"
 
 main() {
-    ssh nixos@$1 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null sudo cat /etc/rancher/k3s/k3s.yaml | sed "s/127.0.0.1/$1/g" >.kube/config
+    ssh nixos@"$1" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null sudo cat /etc/rancher/k3s/k3s.yaml | sed "s/127.0.0.1/$1/g" >.kube/config
 }
 
 main "$@"
