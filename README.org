@@ -21,16 +21,21 @@ Build image based on nixosConfiguration in flake.nix.
 #+end_src
 - ~<MACHINE>~ :: Name of the nixosConfiguration (see flake.nix).
 
+** Build all images
+Build all images based on available nixosConfigurations in flake.nix
+#+begin_src bash
+./scripts/build-all-sd-aarch64.sh
+#+end_src
+
 ** Rebuild a live system
 This rebuilds a live system with ~nixos-rebuild~ command remotely. Note that if the image is freshly built and deployed, first run of this will take some time, due to nix having to rebuild entire system, including nix store (looking for a way to avoid this long wait). Subsequent runs are fast.
 #+begin_src bash
-./scripts/rebuild-host.sh <MACHINE> <IP>
+./scripts/rebuild-host.sh <MACHINE>
 #+end_src
 - ~<NAME>~ :: Name of the nixosConfiguration (see flake.nix).
-- ~<IP>~ :: IP address of remote host.
 
 ** Rebuild Cluster
-This rebuilds an entire cluster, starting from master, then going on to nodes from 01 to N. This is currently hardcoded with hosts and IP addresses.
+This rebuilds an entire cluster, starting from master, then going on to nodes from 01 to N.
 #+begin_src bash
 ./scripts/rebuild-cluster.sh
 #+end_src
@@ -38,8 +43,9 @@ This rebuilds an entire cluster, starting from master, then going on to nodes fr
 ** Initialize k3s cluster
 Script that initializes cluster in following order:
 1. Install cilium as kube-proxy replacement for networking
-2. Install argocd for gitops. This also installs 'Applications', app of apps pattern which includes already installed cilium and argocd
-3. Run open-argo.sh script
+2. Install argocd for gitops.
+3. Install argocd-apps which initializes ApplicationSet, taking over the cluster, including already installed cilium and argocd.
+4. Run open-argo.sh script
 #+begin_src bash
 ./scripts/init.sh
 #+end_src
@@ -54,7 +60,7 @@ Make sure argocd server deployment is ready, then print the password into stdout
 - ~flake.nix~ :: Defines the configurations and flake outputs.
 - ~configurations/~ :: Contains machine configurations.
 - ~scripts/~ :: Scripts used to build images and to manage machines.
-- ~workloads/~ :: Kubernetes applications
+- ~workloads/<namespace>/<application>~ :: Kubernetes applications. Segregated into namespaces, then into applications to leverage ApplicationSet automatic creation of namespaces and workloads.
 
 * Credits
 - [[https://github.com/nix-community/nixos-generators][nixos-generators]]
