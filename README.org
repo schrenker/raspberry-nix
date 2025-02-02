@@ -62,5 +62,9 @@ Make sure argocd server deployment is ready, then print the password into stdout
 - ~scripts/~ :: Scripts used to build images and to manage machines.
 - ~workloads/<namespace>/<application>~ :: Kubernetes applications. Segregated into namespaces, then into applications to leverage ApplicationSet automatic creation of namespaces and workloads.
 
+* To do
+- [ ] Figure out how to pass k3s master IP as well as IP ranges from nix to cilium values without hardcoding them
+- [ ] Observability stack based on OTEL -> prometheus, tempo, loki -> grafana
+
 * Credits
 - [[https://github.com/nix-community/nixos-generators][nixos-generators]]
