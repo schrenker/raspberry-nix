@@ -22,7 +22,7 @@
       "--cluster-cidr 10.42.0.0/16"
       "--service-cidr 10.43.0.0/16"
       "--node-label type=agent"
-      "--node-taint node-role.kubernetes.io/master:NoSchedule"
+      "--node-taint node-role.kubernetes.io/control-plane:NoSchedule"
     ];
   };
 }
