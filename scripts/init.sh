@@ -31,6 +31,8 @@ main() {
     helm dependency update workloads/cilium/cilium
     helm upgrade --install --create-namespace --namespace cilium cilium workloads/cilium/cilium
 
+    kubectl rollout status ds cilium cilium-envoy --namespace cilium --timeout=600s
+
     helm repo add argocd https://argoproj.github.io/argo-helm/
     helm dependency update workloads/argocd/argocd
     helm upgrade --install --create-namespace --namespace argocd argocd workloads/argocd/argocd
