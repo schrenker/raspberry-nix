@@ -26,6 +26,7 @@ main() {
     cp -v result/*.img.zst results/"$1".img.zst
     zstd -d results/"$1".img.zst
     rm -fv results/"$1".img.zst
+    rm -fv result
     chmod 644 results/"$1".img
 }
 
