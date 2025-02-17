@@ -19,7 +19,7 @@ cd "$(git rev-parse --show-toplevel)"
 
 main() {
     kubectl wait --timeout=600s --for=condition=Available=True -n argocd deployment argocd-server
-    kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
+    kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | pbcopy && pbpaste && echo
     (sleep 1 && open -ga "Safari" "https://localhost:8080") &
     kubectl port-forward svc/argocd-server -n argocd 8080:443
 }
