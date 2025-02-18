@@ -18,6 +18,7 @@
       "--disable servicelb"
       "--disable-network-policy"
       "--disable traefik"
+      "--disable local-storage"
       "--cluster-init"
       "--cluster-cidr 10.42.0.0/16"
       "--service-cidr 10.43.0.0/16"
