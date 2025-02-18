@@ -8,9 +8,9 @@ if [[ "${TRACE-0}" == "1" ]]; then
     set -o xtrace
 fi
 
-if [[ "${1-}" =~ ^-*h(elp)?$ ]] || [[ $# -eq 0 ]]; then
-    echo 'Usage: ./pull-kubeconfig.sh IP
-    Pull kubeconfig file from k3s server at IP address.
+if [[ "${1-}" =~ ^-*h(elp)?$ ]]; then
+    echo 'Usage: ./pull-kubeconfig.sh
+    Pull kubeconfig file from k3s master.
 '
     exit
 fi
@@ -19,7 +19,8 @@ cd "$(git rev-parse --show-toplevel)"
 
 main() {
     mkdir -p .kube
-    ssh nixos@"$1" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null sudo cat /etc/rancher/k3s/k3s.yaml | sed "s/127.0.0.1/$1/g" >.kube/config
+    IP=$(nix eval .#nixosConfigurations.k3s-master.config.networking.interfaces.end0.ipv4.addresses --json | jq -r .[0].address)
+    ssh nixos@"$IP" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null sudo cat /etc/rancher/k3s/k3s.yaml | sed "s/127.0.0.1/$IP/g" >.kube/config
 }
 
 main "$@"
