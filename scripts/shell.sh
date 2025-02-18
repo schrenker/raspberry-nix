@@ -11,7 +11,7 @@ fi
 if [[ "${1-}" =~ ^-*h(elp)?$ ]] || [[ $# -eq 0 ]]; then
     echo 'Usage: ./shell.sh NAME
 
-Connect to machine via ssh using its NAME only. Ignore host key checking and known hosts file.
+Connect to machine via ssh using its NAME only. Ignore host key checking and known hosts file. Pass rest of the parameters as a command.
 '
     exit
 fi
@@ -20,8 +20,8 @@ cd "$(git rev-parse --show-toplevel)"
 
 main() {
     IP=$(nix eval .#nixosConfigurations."$1".config.networking.interfaces.end0.ipv4.addresses --json | jq -r .[0].address)
-
-    ssh nixos@"$IP" -o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null"
+    shift
+    ssh nixos@"$IP" -o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" "$@"
 }
 
 main "$@"
