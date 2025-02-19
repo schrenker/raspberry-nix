@@ -1,4 +1,4 @@
-{ specialArgs, config, ... }:
+{ self, specialArgs, config, ... }:
 
 {
   networking.interfaces.end0.ipv4.addresses = [{
@@ -11,7 +11,7 @@
     role = "agent";
     token = "very-secret-token";
     images = [ config.services.k3s.package.airgapImages ];
-    serverAddr = "https://" + specialArgs.master + ":6443";
+    serverAddr = "https://" + (builtins.elemAt self.nixosConfigurations.k3s-master.config.networking.interfaces.end0.ipv4.addresses 0).address + ":6443";
     extraFlags = [ "--node-label type=agent" ];
   };
 }
