@@ -27,6 +27,9 @@ loki:
   singleBinary:
     replicas: 1
 
+  chunksCache:
+    enabled: false
+
   # Zero out replica counts of other deployment modes
   backend:
     replicas: 0
