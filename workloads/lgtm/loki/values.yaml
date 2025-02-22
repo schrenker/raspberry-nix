@@ -18,6 +18,7 @@ loki:
       volume_enabled: true
     ruler:
       enable_api: true
+    auth_enabled: false # Single-tenant mode
 
   minio:
     enabled: true
