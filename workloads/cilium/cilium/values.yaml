@@ -25,6 +25,8 @@ cilium:
     enabled: true
   l2announcements:
     enabled: true
+  nodePort:
+    enabled: true
   gatewayAPI:
     enabled: true
   devices:
