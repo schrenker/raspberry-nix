@@ -32,7 +32,7 @@ spec:
       pipelines:
         logs:
           receivers: [filelog]
-          processors: []
+          #processors: []
           exporters: [otlphttp]
 
   tolerations:
