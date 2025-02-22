@@ -1,7 +1,8 @@
 cilium:
   bpf:
+    masquerade: true
     vlanBypass:
-    - 0
+      - 0
   cluster:
     name: default
   hubble:
