@@ -1,0 +1,49 @@
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel-collector
+spec:
+  mode: daemonset
+  hostNetwork: true
+  config:
+    receivers:
+      filelog:
+        include:
+          - /var/log/pods/*/*/*.log
+        exclude:
+          # Exclude logs from all containers named otel-collector
+          - /var/log/pods/*/otel-collector/*.log
+        start_at: end
+        include_file_path: true
+        include_file_name: false
+        operators:
+          # parse container logs
+          - type: container
+            id: container-parser
+    processors: {}
+
+    exporters:
+      otlphttp:
+        endpoint: http://loki:3100/otlp
+
+    service:
+      pipelines:
+        logs:
+          receivers: [filelog]
+          processors: []
+          exporters: [oltphttp]
+
+  volumeMounts:
+    - name: varlogpods
+      mountPath: /var/log/pods
+      readOnly: true
+    - name: varlogcontainers
+      mountPath: /var/log/containers
+      readOnly: true
+  volumes:
+    - name: varlogpods
+      hostPath:
+        path: /var/log/pods
+    - name: varlogcontainers
+      hostPath:
+        path: /var/log/containers
