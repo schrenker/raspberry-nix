@@ -32,5 +32,5 @@ spec:
       - port: "8472" # vxlan
         protocol: UDP
       - port: "30000"
-        endPort: "32767"
+        endPort: 32767
         protocol: TCP
