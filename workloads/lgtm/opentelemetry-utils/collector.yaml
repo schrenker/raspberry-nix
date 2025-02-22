@@ -26,8 +26,8 @@ spec:
     exporters:
       otlphttp/logs:
         endpoint: http://loki-gateway/otlp
-        headers:
-          X-Scope-OrgID: "fake"
+        # headers:
+        #   X-Scope-OrgID: "fake"
 
     service:
       pipelines:
