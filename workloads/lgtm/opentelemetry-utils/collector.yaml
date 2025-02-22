@@ -25,6 +25,8 @@ spec:
     exporters:
       otlphttp:
         endpoint: http://loki:3100/otlp
+        headers:
+          X-Scope-OrgID: "fake"
 
     service:
       pipelines:
