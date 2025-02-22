@@ -15,6 +15,8 @@ spec:
     - ports:
       - port: "22" # ssh
         protocol: TCP
+      - port: "80" # http
+        protocol: TCP
       - port: "443" # https
         protocol: TCP
       - port: "6443" # kube-apiserver
