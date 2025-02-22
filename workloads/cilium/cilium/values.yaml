@@ -1,6 +1,7 @@
 cilium:
   bpf:
     masquerade: true
+    hostLegacyRouting: true
     vlanBypass:
       - 0
   cluster:
