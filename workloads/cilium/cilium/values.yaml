@@ -33,3 +33,6 @@ cilium:
     - end0
   prometheus:
     enabled: true
+  ingressController:
+    enabled: true
+    loadbalancerMode: shared
