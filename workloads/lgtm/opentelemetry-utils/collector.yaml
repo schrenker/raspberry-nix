@@ -33,6 +33,11 @@ spec:
           processors: []
           exporters: [otlphttp]
 
+  tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/control-plane
+      operator: Exists
+
   volumeMounts:
     - name: varlogpods
       mountPath: /var/log/pods
