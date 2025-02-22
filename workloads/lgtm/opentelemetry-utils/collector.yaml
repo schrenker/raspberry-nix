@@ -20,18 +20,19 @@ spec:
           # parse container logs
           - type: container
             id: container-parser
-    processors: {}
+    processors:
+      batch:
 
     exporters:
-      otlphttp:
+      otlphttp/logs:
         endpoint: http://loki-gateway/otlp
 
     service:
       pipelines:
         logs:
           receivers: [filelog]
-          #processors: []
-          exporters: [otlphttp]
+          processors: [batch]
+          exporters: [otlphttp/logs]
 
   tolerations:
     - effect: NoSchedule
