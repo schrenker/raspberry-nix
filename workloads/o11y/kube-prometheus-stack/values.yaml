@@ -6,6 +6,12 @@ kube-prometheus-stack:
       hosts:
         - grafana.zawadzki.local
 
+    grafana.ini:
+      analytics:
+        check_for_updates: false
+        reporting_enabled: false
+        check_for_plugins_updates: false
+
     persistence:
       enabled: true
       type: sts
