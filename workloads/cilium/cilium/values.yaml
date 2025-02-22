@@ -1,7 +1,5 @@
 cilium:
   bpf:
-    masquerade: true
-    hostLegacyRouting: true
     vlanBypass:
       - 0
   cluster:
@@ -27,16 +25,9 @@ cilium:
     enabled: true
   l2announcements:
     enabled: true
-  nodePort:
-    enabled: true
   gatewayAPI:
     enabled: true
   devices:
     - end0
   prometheus:
     enabled: true
-  ingressController:
-    enabled: true
-    default: true
-    loadbalancerMode: dedicated
-    enforceHttps: false
