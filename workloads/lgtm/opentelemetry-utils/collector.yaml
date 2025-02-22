@@ -31,7 +31,7 @@ spec:
         logs:
           receivers: [filelog]
           processors: []
-          exporters: [oltphttp]
+          exporters: [otlphttp]
 
   volumeMounts:
     - name: varlogpods
