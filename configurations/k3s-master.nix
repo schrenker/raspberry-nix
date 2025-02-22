@@ -26,4 +26,14 @@
       "--node-taint node-role.kubernetes.io/control-plane:NoSchedule"
     ];
   };
+
+  environment.etc."rancher/k3s/config.yaml" = {
+    text = ''
+      kube-controller-manager-arg:
+        - "bind-address=0.0.0.0"
+      kube-scheduler-arg:
+        - "bind-address=0.0.0.0"
+      etcd-expose-metrics: true
+    '';
+  };
 }
