@@ -2,7 +2,7 @@ kube-prometheus-stack:
   grafana:
     ingress:
       enabled: true
-      ingressClassName: cilium
+      ingressClassName: traefik
       hosts:
         - grafana.zawadzki.local
 
