@@ -6,7 +6,7 @@ cilium:
     name: default
   hubble:
     relay:
-      enabled: true
+      enabled: false
       resources:
         requests:
           cpu: 10m
@@ -14,7 +14,7 @@ cilium:
         limits:
           memory: 100Mi
     ui:
-      enabled: true
+      enabled: false
       backend:
         resources:
           requests:
