@@ -41,7 +41,7 @@ spec:
       cpu: 100m
       memory: 200Mi
     limits:
-      Memory: 200Mi
+      memory: 200Mi
 
   tolerations:
     - effect: NoSchedule
