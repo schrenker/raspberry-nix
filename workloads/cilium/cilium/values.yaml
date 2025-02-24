@@ -7,8 +7,28 @@ cilium:
   hubble:
     relay:
       enabled: true
+      resources:
+        requests:
+          cpu: 10m
+          memory: 100Mi
+        limits:
+          memory: 100Mi
     ui:
       enabled: true
+      backend:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
+      frontend:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
   ipam:
     operator:
       clusterPoolIPv4PodCIDRList: 10.42.0.0/16
@@ -19,6 +39,12 @@ cilium:
     replicas: 1
     prometheus:
       enabled: true
+    resources:
+      requests:
+        cpu: 50m
+        memory: 100Mi
+      limits:
+        memory: 100Mi
   routingMode: tunnel
   tunnelProtocol: vxlan
   hostFirewall:
@@ -31,3 +57,33 @@ cilium:
     - end0
   prometheus:
     enabled: true
+
+  initResources:
+    requests:
+      cpu: 10m
+      memory: 10Mi
+    limits:
+      memory: 10Mi
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 200Mi
+    limits:
+      memory: 200Mi
+
+  cni:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 10Mi
+      limits:
+        memory: 10Mi
+
+  envoy:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+      limits:
+        memory: 100Mi
