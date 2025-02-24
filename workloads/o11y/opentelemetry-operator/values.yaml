@@ -2,8 +2,23 @@ opentelemetry-operator:
   manager:
     collectorImage:
       repository: otel/opentelemetry-collector-k8s
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 128Mi
+
   admissionWebhooks:
     certManager:
       enabled: false
     autoGenerateCert:
       enabled: true
+
+  kubeRBACProxy:
+    resources:
+      limits:
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 64Mi

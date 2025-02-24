@@ -36,6 +36,13 @@ spec:
           processors: [batch]
           exporters: [otlphttp/logs]
 
+  resources:
+    requests:
+      cpu: 100m
+      memory: 200Mi
+    limits:
+      Memory: 200Mi
+
   tolerations:
     - effect: NoSchedule
       key: node-role.kubernetes.io/control-plane
