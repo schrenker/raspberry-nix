@@ -41,6 +41,16 @@
           };
         };
 
+        nixosConfigurations.k3s-node03 = inputs.nixpkgs.lib.nixosSystem {
+          modules = [ self.nixosModules.base ./configurations/k3s-node.nix ];
+          specialArgs = {
+            inherit inputs self;
+            hostName = "k3s-node03";
+            address = "192.168.1.68";
+          };
+        };
+
+
       };
       perSystem = { config, self', inputs', pkgs, system, ... }: {
         devShells.default = pkgs.mkShell {
