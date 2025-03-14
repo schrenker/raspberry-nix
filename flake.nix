@@ -19,7 +19,7 @@
           specialArgs = {
             inherit inputs;
             hostName = "k3s-master";
-            address = "192.168.1.65";
+            address = "192.168.1.170";
           };
         };
 
@@ -28,7 +28,7 @@
           specialArgs = {
             inherit inputs self;
             hostName = "k3s-node01";
-            address = "192.168.1.66";
+            address = "192.168.1.171";
           };
         };
 
@@ -37,7 +37,7 @@
           specialArgs = {
             inherit inputs self;
             hostName = "k3s-node02";
-            address = "192.168.1.67";
+            address = "192.168.1.172";
           };
         };
 
@@ -46,7 +46,7 @@
           specialArgs = {
             inherit inputs self;
             hostName = "k3s-node03";
-            address = "192.168.1.68";
+            address = "192.168.1.173";
           };
         };
 
