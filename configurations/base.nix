@@ -10,7 +10,7 @@
   services.rpcbind.enable = true;
 
   networking.defaultGateway = "192.168.1.1";
-  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+  networking.nameservers = [ "192.168.1.254" "9.9.9.9" ];
   networking.hostName = specialArgs.hostName;
   networking.firewall.enable = false;
 
