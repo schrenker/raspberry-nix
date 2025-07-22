@@ -4,3 +4,5 @@
 /.kube
 /secret/
 /workloads/*/*/charts
+/keys.txt
+/.sops.yaml
