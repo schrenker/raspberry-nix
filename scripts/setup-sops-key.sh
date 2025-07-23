@@ -35,6 +35,7 @@ main() {
 creation_rules:
     - age: >-
         $AGEKEY
+      encrypted_suffix: Templates
 EOF
 
 }

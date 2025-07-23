@@ -22,7 +22,7 @@ cd "$(git rev-parse --show-toplevel)"
 main() {
     ./scripts/setup-sops-key.sh
 
-    sops --encrypt --encrypted-suffix Templates "$1"
+    sops --encrypt --in-place "$1"
 
 }
 
