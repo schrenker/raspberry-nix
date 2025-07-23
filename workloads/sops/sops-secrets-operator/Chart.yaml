@@ -6,4 +6,4 @@ version: 0.22.0
 dependencies:
   - name: sops-secrets-operator
     version: 0.22.0
-    repository: https://github.com/isindir/sops-secrets-operator.git
+    repository: https://isindir.github.io/sops-secrets-operator/
