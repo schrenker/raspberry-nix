@@ -19,7 +19,7 @@ cd "$(git rev-parse --show-toplevel)"
 
 main() {
     nix flake show --json | jq -r '.nixosConfigurations | keys.[]' | while read -r line; do
-        ./scripts/build-sd-aarch64.sh "$line"
+        ./scripts/build-sd.sh "$line"
     done
 
 }
