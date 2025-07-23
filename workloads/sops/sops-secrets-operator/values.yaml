@@ -1,0 +1,24 @@
+---
+sops-secrets-operator:
+  secretsAsFiles:
+    - mountPath: /etc/sops-key
+      name: sops-key
+      secretName: sops-key
+  extraEnv:
+    - name: SOPS_AGE_KEY_FILE
+      value: /etc/sops-key/keys.txt
+
+  resources:
+    limits:
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
+
+  securityContext:
+    enabled: true
+    container:
+      enabled: true
+
+  metrics:
+    enabled: true
