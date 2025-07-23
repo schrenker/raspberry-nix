@@ -19,6 +19,3 @@ sops-secrets-operator:
     enabled: true
     container:
       enabled: true
-
-  metrics:
-    enabled: true
