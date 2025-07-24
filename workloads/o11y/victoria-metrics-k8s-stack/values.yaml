@@ -1,2 +1,26 @@
 ---
 victoria-metrics-k8s-stack:
+  vmsingle:
+    enabled: true
+  alertmanager:
+    enabled: true
+  vmalert:
+    enabled: true
+  vmagent:
+    enabled: true
+  grafana:
+    enabled: true
+  kube-state-metrics:
+    enabled: true
+  kubelet:
+    enabled: true
+  kubeApiServer:
+    enabled: true
+  kubeControllerManager:
+    enabled: true
+  coreDns:
+    enabled: true
+  kubeEtcd:
+    enabled: true
+  kubeScheduler:
+    enabled: true
