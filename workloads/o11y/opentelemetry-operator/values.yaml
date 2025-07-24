@@ -1,3 +1,4 @@
+---
 opentelemetry-operator:
   manager:
     collectorImage:
