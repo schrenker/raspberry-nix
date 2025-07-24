@@ -42,7 +42,8 @@ opentelemetry-collector:
           exporters: [otlphttp/victoriametrics]
         metrics:
           receivers: [otlp]
-          processors: [deltatocumulative]
+          # processors: [deltatocumulative]
+          processors: []
           exporters: [otlphttp/victoriametrics]
 
   tolerations:
