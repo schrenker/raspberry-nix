@@ -12,8 +12,6 @@ opentelemetry-collector:
       extractAllPodLabels: true
     kubeletMetrics:
       enabled: true
-    clusterMetrics:
-      enabled: true
 
   config:
     # deltatocumulative processor is needed to convert metrics with delta temporality to cumulative temporality.
