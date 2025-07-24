@@ -10,7 +10,7 @@ fi
 
 if [[ "${1-}" =~ ^-*h(elp)?$ ]] || [[ $# -eq 0 ]]; then
 
-    echo 'Usage: ./sops-encrypt.sh FILE
+    echo 'Usage: ./encrypt.sh FILE
 
 Encrypt a file with sops for cluster use.
 '
