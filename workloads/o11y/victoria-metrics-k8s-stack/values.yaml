@@ -7,7 +7,7 @@ victoria-metrics-k8s-stack:
   vmalert:
     enabled: true
   vmagent:
-    enabled: true
+    enabled: false
   grafana:
     enabled: true
   kube-state-metrics:
