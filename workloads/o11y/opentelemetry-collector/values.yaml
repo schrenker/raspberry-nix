@@ -30,7 +30,7 @@ opentelemetry-collector:
       otlphttp/victoriametrics:
         compression: gzip
         encoding: proto
-        metrics_endpoint: http://victoria-metrics-victoria-metrics-single-server:8428/opentelemetry/v1/metrics
+        metrics_endpoint: http://vmsingle-victoria-metrics-k8s-stack:8428/opentelemetry/v1/metrics
         logs_endpoint: http://victoria-logs-victoria-logs-single-server:9428/insert/opentelemetry/v1/logs
         tls:
           insecure: true
