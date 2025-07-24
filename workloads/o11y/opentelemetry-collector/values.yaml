@@ -1,5 +1,4 @@
 ---
-
 opentelemetry-collector:
   image:
     repository: "ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-k8s"
@@ -50,26 +49,6 @@ opentelemetry-collector:
     - effect: NoSchedule
       key: node-role.kubernetes.io/control-plane
       operator: Exists
-
-  extraEnvs: []
-  extraEnvsFrom: []
-  # This also supports template content, which will eventually be converted to yaml.
-  # extraVolumes:
-  #   - name: varlogpods
-  #     hostPath:
-  #       path: /var/log/pods
-  #   - name: varlogcontainers
-  #     hostPath:
-  #       path: /var/log/containers
-
-  # # This also supports template content, which will eventually be converted to yaml.
-  # extraVolumeMounts:
-  #   - name: varlogpods
-  #     mountPath: /var/log/pods
-  #     readOnly: true
-  #   - name: varlogcontainers
-  #     mountPath: /var/log/containers
-  #     readOnly: true
 
   resources:
     requests:
