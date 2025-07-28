@@ -5,8 +5,10 @@ k8s-monitoring:
 
   destinations:
     - name: metrics
-      type: prometheus
+      type: oltp
       url: http://victoria-metrics-victoria-metrics-single-server:8428/opentelemetry/v1/metrics
+      metrics:
+        enabled: true
 
     - name: logs
       type: otlp
