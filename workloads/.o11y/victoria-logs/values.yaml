@@ -1,0 +1,4 @@
+---
+victoria-logs-single:
+  server:
+    enabled: true
