@@ -35,5 +35,3 @@ spec:
             - port: "30000"
               endPort: 32767
               protocol: TCP
-            - port: "9100"
-              protocol: TCP
