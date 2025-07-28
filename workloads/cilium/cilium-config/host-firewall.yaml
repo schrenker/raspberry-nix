@@ -1,3 +1,4 @@
+---
 apiVersion: "cilium.io/v2"
 kind: CiliumClusterwideNetworkPolicy
 metadata:
@@ -8,29 +9,29 @@ spec:
     matchLabels:
       type: agent
   ingress:
-  - fromEntities:
-    - remote-node
-    - health
-  - toPorts:
-    - ports:
-      - port: "22" # ssh
-        protocol: TCP
-      - port: "80" # http
-        protocol: TCP
-      - port: "443" # https
-        protocol: TCP
-      - port: "6443" # kube-apiserver
-        protocol: TCP
-      - port: "2379" # etcd
-        protocol: TCP
-      - port: "4240" # cilium health checks
-        protocol: TCP
-      - port: "4244" # cilium relay
-        protocol: TCP
-      - port: "10250" # kubelet api
-        protocol: TCP
-      - port: "8472" # vxlan
-        protocol: UDP
-      - port: "30000"
-        endPort: 32767
-        protocol: TCP
+    - fromEntities:
+        - remote-node
+        - health
+    - toPorts:
+        - ports:
+            - port: "22" # ssh
+              protocol: TCP
+            - port: "80" # http
+              protocol: TCP
+            - port: "443" # https
+              protocol: TCP
+            - port: "6443" # kube-apiserver
+              protocol: TCP
+            - port: "2379" # etcd
+              protocol: TCP
+            - port: "4240" # cilium health checks
+              protocol: TCP
+            - port: "4244" # cilium relay
+              protocol: TCP
+            - port: "10250" # kubelet api
+              protocol: TCP
+            - port: "8472" # vxlan
+              protocol: UDP
+            - port: "30000"
+              endPort: 32767
+              protocol: TCP

@@ -1,0 +1,22 @@
+---
+apiVersion: cilium.io/v2
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: allow-internal-node-exporter
+spec:
+  nodeSelector: {}
+  endpointSelector:
+    matchLabels:
+      k8s:io.cilium/reserved:host
+  ingress:
+    - fromEndpoints:
+        - matchLabels:
+            kubernetes.io/name: vmagent
+      toPorts:
+        - ports:
+            - port: "9100"
+              protocol: TCP
+  egress:
+    # Potentially allow egress from the host endpoint if Node Exporter needs to make outbound calls
+    # (unlikely for standard Node Exporter metrics)
+    - {} # Allow all egress for simplicity, or restrict if needed.
