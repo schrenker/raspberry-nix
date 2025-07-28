@@ -4,12 +4,12 @@ kind: CiliumClusterwideNetworkPolicy
 metadata:
   name: allow-internal-node-exporter
 spec:
-  # nodeSelector:
-  #   matchLabels:
-  #     type: agent
-  endpointSelector:
+  nodeSelector:
     matchLabels:
-      app.kubernetes.io/name: prometheus-node-exporter
+      type: agent
+  # endpointSelector:
+  #   matchLabels:
+  #     app.kubernetes.io/name: prometheus-node-exporter
   ingress:
     - fromEndpoints:
         - matchLabels:
