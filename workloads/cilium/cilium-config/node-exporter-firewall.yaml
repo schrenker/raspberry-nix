@@ -7,7 +7,7 @@ spec:
   nodeSelector: {}
   endpointSelector:
     matchLabels:
-      k8s:io.cilium/reserved:host
+      k8s:io.cilium/reserved: "host"
   ingress:
     - fromEndpoints:
         - matchLabels:
