@@ -5,7 +5,7 @@ k8s-monitoring:
 
   destinations:
     - name: metrics
-      type: oltp
+      type: otlp
       url: http://victoria-metrics-victoria-metrics-single-server:8428/opentelemetry/v1/metrics
       metrics:
         enabled: true
