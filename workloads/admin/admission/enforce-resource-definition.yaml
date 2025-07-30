@@ -21,10 +21,14 @@ spec:
   failurePolicy: Fail
   validations:
     - expression: |
-        (object.spec.containers ||
-         object.spec.template?.spec.containers ||
-         object.spec.jobTemplate?.spec.template?.spec.containers ||
-         []
+        (
+          object.kind == 'Pod' ?
+            (has(object.spec) && has(object.spec.containers) ? object.spec.containers : []) :
+          (object.kind == 'Deployment' || object.kind == 'StatefulSet' || object.kind == 'DaemonSet' || object.kind == 'Job') ?
+            (has(object.spec) && has(object.spec.template) && has(object.spec.template.spec) && has(object.spec.template.spec.containers) ? object.spec.template.spec.containers : []) :
+          object.kind == 'CronJob' ?
+            (has(object.spec) && has(object.spec.jobTemplate) && has(object.spec.jobTemplate.spec) && has(object.spec.jobTemplate.spec.template) && has(object.spec.jobTemplate.spec.template.spec) && has(object.spec.jobTemplate.spec.template.spec.containers) ? object.spec.jobTemplate.spec.template.spec.containers : []) :
+          []
         ).all(container,
           has(container.resources) &&
           has(container.resources.requests) &&
@@ -33,10 +37,14 @@ spec:
       message: "All containers must specify CPU requests."
 
     - expression: |
-        (object.spec.containers ||
-         object.spec.template?.spec.containers ||
-         object.spec.jobTemplate?.spec.template?.spec.containers ||
-         []
+        (
+          object.kind == 'Pod' ?
+            (has(object.spec) && has(object.spec.containers) ? object.spec.containers : []) :
+          (object.kind == 'Deployment' || object.kind == 'StatefulSet' || object.kind == 'DaemonSet' || object.kind == 'Job') ?
+            (has(object.spec) && has(object.spec.template) && has(object.spec.template.spec) && has(object.spec.template.spec.containers) ? object.spec.template.spec.containers : []) :
+          object.kind == 'CronJob' ?
+            (has(object.spec) && has(object.spec.jobTemplate) && has(object.spec.jobTemplate.spec) && has(object.spec.jobTemplate.spec.template) && has(object.spec.jobTemplate.spec.template.spec) && has(object.spec.jobTemplate.spec.template.spec.containers) ? object.spec.jobTemplate.spec.template.spec.containers : []) :
+          []
         ).all(container,
           has(container.resources) &&
           has(container.resources.requests) &&
@@ -45,10 +53,14 @@ spec:
       message: "All containers must specify memory requests."
 
     - expression: |
-        (object.spec.containers ||
-         object.spec.template?.spec.containers ||
-         object.spec.jobTemplate?.spec.template?.spec.containers ||
-         []
+        (
+          object.kind == 'Pod' ?
+            (has(object.spec) && has(object.spec.containers) ? object.spec.containers : []) :
+          (object.kind == 'Deployment' || object.kind == 'StatefulSet' || object.kind == 'DaemonSet' || object.kind == 'Job') ?
+            (has(object.spec) && has(object.spec.template) && has(object.spec.template.spec) && has(object.spec.template.spec.containers) ? object.spec.template.spec.containers : []) :
+          object.kind == 'CronJob' ?
+            (has(object.spec) && has(object.spec.jobTemplate) && has(object.spec.jobTemplate.spec) && has(object.spec.jobTemplate.spec.template) && has(object.spec.jobTemplate.spec.template.spec) && has(object.spec.jobTemplate.spec.template.spec.containers) ? object.spec.jobTemplate.spec.template.spec.containers : []) :
+          []
         ).all(container,
           has(container.resources) &&
           has(container.resources.limits) &&
@@ -57,10 +69,14 @@ spec:
       message: "All containers must specify memory limits."
 
     - expression: |
-        (object.spec.containers ||
-         object.spec.template?.spec.containers ||
-         object.spec.jobTemplate?.spec.template?.spec.containers ||
-         []
+        (
+          object.kind == 'Pod' ?
+            (has(object.spec) && has(object.spec.containers) ? object.spec.containers : []) :
+          (object.kind == 'Deployment' || object.kind == 'StatefulSet' || object.kind == 'DaemonSet' || object.kind == 'Job') ?
+            (has(object.spec) && has(object.spec.template) && has(object.spec.template.spec) && has(object.spec.template.spec.containers) ? object.spec.template.spec.containers : []) :
+          object.kind == 'CronJob' ?
+            (has(object.spec) && has(object.spec.jobTemplate) && has(object.spec.jobTemplate.spec) && has(object.spec.jobTemplate.spec.template) && has(object.spec.jobTemplate.spec.template.spec) && has(object.spec.jobTemplate.spec.template.spec.containers) ? object.spec.jobTemplate.spec.template.spec.containers : []) :
+          []
         ).all(container,
           quantity(container.resources.requests.memory) == quantity(container.resources.limits.memory)
         )
