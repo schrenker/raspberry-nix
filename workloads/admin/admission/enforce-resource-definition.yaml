@@ -21,8 +21,8 @@ spec:
   failurePolicy: Fail
   validations:
     - expression: |
-        (kind in ["Deployment", "StatefulSet", "DaemonSet", "Job"] ? spec.template.spec.containers :
-        (kind == "CronJob" ? spec.jobTemplate.spec.template.spec.containers : spec.containers)).all(container,
+        (object.kind in ["Deployment", "StatefulSet", "DaemonSet", "Job"] ? object.spec.template.spec.containers :
+        (object.kind == "CronJob" ? object.spec.jobTemplate.spec.template.spec.containers : object.spec.containers)).all(container,
             has(container.resources) &&
             has(container.resources.requests) &&
             has(container.resources.requests.cpu) &&
