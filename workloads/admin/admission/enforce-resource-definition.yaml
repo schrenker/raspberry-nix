@@ -21,7 +21,11 @@ spec:
   failurePolicy: Fail
   validations:
     - expression: |
-        (has(object.spec.template) ? object.spec.template.spec.containers : object.spec.containers).all(container,
+        (object.spec.containers ||
+         object.spec.template?.spec.containers ||
+         object.spec.jobTemplate?.spec.template?.spec.containers ||
+         []
+        ).all(container,
           has(container.resources) &&
           has(container.resources.requests) &&
           has(container.resources.requests.cpu)
@@ -29,7 +33,11 @@ spec:
       message: "All containers must specify CPU requests."
 
     - expression: |
-        (has(object.spec.template) ? object.spec.template.spec.containers : object.spec.containers).all(container,
+        (object.spec.containers ||
+         object.spec.template?.spec.containers ||
+         object.spec.jobTemplate?.spec.template?.spec.containers ||
+         []
+        ).all(container,
           has(container.resources) &&
           has(container.resources.requests) &&
           has(container.resources.requests.memory)
@@ -37,7 +45,11 @@ spec:
       message: "All containers must specify memory requests."
 
     - expression: |
-        (has(object.spec.template) ? object.spec.template.spec.containers : object.spec.containers).all(container,
+        (object.spec.containers ||
+         object.spec.template?.spec.containers ||
+         object.spec.jobTemplate?.spec.template?.spec.containers ||
+         []
+        ).all(container,
           has(container.resources) &&
           has(container.resources.limits) &&
           has(container.resources.limits.memory)
@@ -45,7 +57,11 @@ spec:
       message: "All containers must specify memory limits."
 
     - expression: |
-        (has(object.spec.template) ? object.spec.template.spec.containers : object.spec.containers).all(container,
+        (object.spec.containers ||
+         object.spec.template?.spec.containers ||
+         object.spec.jobTemplate?.spec.template?.spec.containers ||
+         []
+        ).all(container,
           quantity(container.resources.requests.memory) == quantity(container.resources.limits.memory)
         )
       message: "Memory requests must be equal to memory limits for all containers."
