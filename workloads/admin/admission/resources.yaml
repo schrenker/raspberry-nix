@@ -1,0 +1,52 @@
+---
+apiVersion: admissionregistration.k8s.io/v1alpha1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: enforce-resource-requests-limits
+spec:
+  matchConstraints:
+    resourceRules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["pods"]
+      - apiGroups: ["apps"]
+        apiVersions: ["v1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["deployments", "statefulsets", "daemonsets"]
+      - apiGroups: ["batch"]
+        apiVersions: ["v1"]
+        operations: ["CREATE", "UPDATE"]
+        resources: ["jobs", "cronjobs"]
+  failurePolicy: Fail
+  validations:
+    - expression: |
+        let containers = has(object.spec.template) ? object.spec.template.spec.containers : object.spec.containers;
+        containers.all(container,
+          has(container.resources) &&
+          has(container.resources.requests) &&
+          has(container.resources.requests.cpu)
+        )
+      message: "All containers must specify CPU requests."
+    - expression: |
+        let containers = has(object.spec.template) ? object.spec.template.spec.containers : object.spec.containers;
+        containers.all(container,
+          has(container.resources) &&
+          has(container.resources.requests) &&
+          has(container.resources.requests.memory)
+        )
+      message: "All containers must specify memory requests."
+    - expression: |
+        let containers = has(object.spec.template) ? object.spec.template.spec.containers : object.spec.containers;
+        containers.all(container,
+          has(container.resources) &&
+          has(container.resources.limits) &&
+          has(container.resources.limits.memory)
+        )
+      message: "All containers must specify memory limits."
+    - expression: |
+        let containers = has(object.spec.template) ? object.spec.template.spec.containers : object.spec.containers;
+        containers.all(container,
+          quantity(container.resources.requests.memory) == quantity(container.resources.limits.memory)
+        )
+      message: "Memory requests must be equal to memory limits for all containers."
