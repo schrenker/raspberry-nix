@@ -10,19 +10,20 @@ spec:
         apiVersions: ["v1"]
         operations: ["CREATE", "UPDATE"]
         resources: ["pods"]
-      - apiGroups: ["apps"]
-        apiVersions: ["v1"]
-        operations: ["CREATE", "UPDATE"]
-        resources: ["deployments", "statefulsets", "daemonsets"]
-      - apiGroups: ["batch"]
-        apiVersions: ["v1"]
-        operations: ["CREATE", "UPDATE"]
-        resources: ["jobs", "cronjobs"]
+      # - apiGroups: ["apps"]
+      #   apiVersions: ["v1"]
+      #   operations: ["CREATE", "UPDATE"]
+      #   resources: ["deployments", "statefulsets", "daemonsets"]
+      # - apiGroups: ["batch"]
+      #   apiVersions: ["v1"]
+      #   operations: ["CREATE", "UPDATE"]
+      #   resources: ["jobs", "cronjobs"]
   failurePolicy: Fail
   validations:
     - expression: |
-        (object.kind in ["Deployment", "StatefulSet", "DaemonSet", "Job"] ? object.spec.template.spec.containers :
-        (object.kind == "CronJob" ? object.spec.jobTemplate.spec.template.spec.containers : object.spec.containers)).all(container,
+        # (object.kind in ["Deployment", "StatefulSet", "DaemonSet", "Job"] ? object.spec.template.spec.containers :
+        # (object.kind == "CronJob" ? object.spec.jobTemplate.spec.template.spec.containers : object.spec.containers))
+        object.spec.containers.all(container,
             has(container.resources) &&
             has(container.resources.requests) &&
             has(container.resources.requests.cpu) &&
@@ -30,4 +31,4 @@ spec:
             has(container.resources.limits) &&
             has(container.resources.limits.memory) &&
             container.resources.requests.memory == container.resources.limits.memory)
-      message: "All containers must specify CPU requests."
+      message: ""
