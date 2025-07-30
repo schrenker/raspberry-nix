@@ -26,6 +26,7 @@ main() {
         echo "$KEYS" >./keys.txt
     else
         age-keygen --output ./keys.txt 2>/dev/null || echo "Key exists, not overwriting"
+        kubectl create namespace sops --dry-run=client --output=yaml | kubectl apply --filename -
         kubectl create secret generic sops-key --namespace sops --from-file=./keys.txt
     fi
 
