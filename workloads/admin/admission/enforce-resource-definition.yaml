@@ -39,7 +39,3 @@ metadata:
 spec:
   policyName: "enforce-resource-definition"
   validationActions: [Deny]
-  matchResources:
-    namespaceSelector:
-      matchLabels:
-        vap: enforce
