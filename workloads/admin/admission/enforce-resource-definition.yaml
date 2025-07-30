@@ -2,7 +2,7 @@
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingAdmissionPolicy
 metadata:
-  name: enforce-resource-requests-limits
+  name: enforce-resource-definition
 spec:
   matchConstraints:
     resourceRules:
@@ -21,32 +21,31 @@ spec:
   failurePolicy: Fail
   validations:
     - expression: |
-        let containers = has(object.spec.template) ? object.spec.template.spec.containers : object.spec.containers;
-        containers.all(container,
+        (has(object.spec.template) ? object.spec.template.spec.containers : object.spec.containers).all(container,
           has(container.resources) &&
           has(container.resources.requests) &&
           has(container.resources.requests.cpu)
         )
       message: "All containers must specify CPU requests."
+
     - expression: |
-        let containers = has(object.spec.template) ? object.spec.template.spec.containers : object.spec.containers;
-        containers.all(container,
+        (has(object.spec.template) ? object.spec.template.spec.containers : object.spec.containers).all(container,
           has(container.resources) &&
           has(container.resources.requests) &&
           has(container.resources.requests.memory)
         )
       message: "All containers must specify memory requests."
+
     - expression: |
-        let containers = has(object.spec.template) ? object.spec.template.spec.containers : object.spec.containers;
-        containers.all(container,
+        (has(object.spec.template) ? object.spec.template.spec.containers : object.spec.containers).all(container,
           has(container.resources) &&
           has(container.resources.limits) &&
           has(container.resources.limits.memory)
         )
       message: "All containers must specify memory limits."
+
     - expression: |
-        let containers = has(object.spec.template) ? object.spec.template.spec.containers : object.spec.containers;
-        containers.all(container,
+        (has(object.spec.template) ? object.spec.template.spec.containers : object.spec.containers).all(container,
           quantity(container.resources.requests.memory) == quantity(container.resources.limits.memory)
         )
       message: "Memory requests must be equal to memory limits for all containers."
