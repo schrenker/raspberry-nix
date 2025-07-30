@@ -30,7 +30,7 @@ spec:
             has(container.resources.limits) &&
             has(container.resources.limits.memory) &&
             container.resources.requests.memory == container.resources.limits.memory)
-      message: "All containers must specify CPU requests."
+      message: "All containers must specify CPU requests, Memory requests and Memory limits. Memory requests must be equal to Memory limits."
 ---
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingAdmissionPolicyBinding
