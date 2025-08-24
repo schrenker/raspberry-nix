@@ -31,6 +31,12 @@
 
   boot.supportedFilesystems = [ "nfs" ];
 
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 20;
+  };
+
   system.stateVersion = "23.11";
 
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
