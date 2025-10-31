@@ -22,7 +22,8 @@ main() {
 
     mkdir -p .kube
     echo "MSG:: pulling kubeconfig"
-    talosctl kubeconfig ./kube/config --nodes "$CPLANE_IP"
+
+    talosctl kubeconfig ./.kube/config --nodes "$CPLANE_IP" --force
 }
 
 main "$@"
