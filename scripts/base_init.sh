@@ -36,9 +36,9 @@ main() {
     helm dependency update workloads/argocd/argocd-apps
     helm upgrade --install --namespace argocd argocd-apps workloads/argocd/argocd-apps
 
-    ./scripts/setup-sops-key.sh
+    ./scripts/setup_sops_key.sh
 
-    ./scripts/open-argo.sh
+    ./scripts/open_argo.sh
 }
 
 main "$@"
