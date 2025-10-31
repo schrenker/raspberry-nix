@@ -1,0 +1,58 @@
+---
+clusterName: raspberry
+talosVersion: v1.11.0
+kubernetesVersion: v1.33.1
+endpoint: https://192.168.1.170:6443
+cniConfig:
+  name: none
+patches:
+  - |-
+    machine:
+      network:
+        interfaces:
+          - interface: end0
+            dhcp: true
+      time:
+        disabled: false
+        servers: [192.168.1.254, pool.ntp.org]
+    cluster:
+      apiServer:
+        admissionControl:
+          - name: PodSecurity
+            configuration:
+              apiVersion: pod-security.admission.config.k8s.io/v1alpha1
+              defaults:
+                audit: restricted
+                audit-version: latest
+                enforce: baseline
+                enforce-version: latest
+                warn: restricted
+                warn-version: latest
+              exemptions:
+                namespaces: [cilium, argocd]
+                runtimeClasses: []
+                usernames: []
+              kind: PodSecurityConfiguration
+      network:
+        cni:
+          name: none
+      proxy:
+        disabled: true
+
+nodes:
+  - hostname: talos-master
+    installDisk: /dev/mmcblk0
+    ipAddress: 192.168.1.170
+    controlPlane: true
+  - hostname: talos-node01
+    ipAddress: 192.168.1.171
+    controlPlane: false
+    installDisk: /dev/mmcblk0
+  - hostname: talos-node02
+    ipAddress: 192.168.1.172
+    controlPlane: false
+    installDisk: /dev/mmcblk0
+  - hostname: talos-node03
+    ipAddress: 192.168.1.173
+    controlPlane: false
+    installDisk: /dev/mmcblk0
