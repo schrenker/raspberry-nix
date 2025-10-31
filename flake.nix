@@ -60,6 +60,7 @@
             inputs.nil.packages.${system}.nil
             kube-capacity
             nixos-rebuild
+            talosctl
           ];
         };
       };
