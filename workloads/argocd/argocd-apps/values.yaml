@@ -7,7 +7,7 @@ argocd-apps:
       goTemplate: true
       generators:
         - git:
-            repoURL: 'https://github.com/schrenker/raspberry-nix.git'
+            repoURL: 'https://github.com/schrenker/raspberry-talos.git'
             revision: HEAD
             directories:
             - path: "workloads/**/*"
@@ -17,7 +17,7 @@ argocd-apps:
         spec:
           project: default
           source:
-            repoURL: 'https://github.com/schrenker/raspberry-nix.git'
+            repoURL: 'https://github.com/schrenker/raspberry-talos.git'
             targetRevision: HEAD
             path: '{{ .path.path }}'
           destination:
