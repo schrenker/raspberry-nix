@@ -18,23 +18,14 @@ fi
 cd "$(git rev-parse --show-toplevel)"
 
 main() {
-    echo "MSG:: patching configuration files"
-    talosctl machineconfig patch ./talos/controlplane.yaml --patch @./configuration/base.yaml --output ./talos/controlplane.yaml
-    talosctl machineconfig patch ./talos/worker.yaml --patch @./configuration/base.yaml --output ./talos/worker.yaml
 
-    echo "MSG:: Removing duplicates from configuration files"
-    yq e '(... | select(type == "!!seq")) |= unique' -i ./talos/controlplane.yaml
-    yq e '(... | select(type == "!!seq")) |= unique' -i ./talos/worker.yaml
+    which talhelper >/dev/null
 
-    echo "MSG:: Applying configuration to Control Plane node"
-    talosctl apply-config --nodes "$CPLANE_IP" --file ./talos/controlplane.yaml
+    talhelper genconfig -c talos/talconfig.yaml -s talos/talsecret.sops.yaml -o configuration/ --no-gitignore
 
-    echo "MSG:: Applying configuration to Worker Nodes"
-    for ip in $WORKER_IP; do
-        talosctl apply-config --nodes "$ip" --file ./talos/worker.yaml
-        echo "Configuration applied to $ip"
-        echo ""
-    done
+    while read -r HOSTNAME IP_ADDRESS; do
+        talosctl apply-config --nodes "$IP_ADDRESS" --file ./configuration/raspberry-"$HOSTNAME".yaml
+    done < <(yq -r '.nodes[] | .hostname + " " + .ipAddress' ./talos/talconfig.yaml)
 }
 
 main "$@"

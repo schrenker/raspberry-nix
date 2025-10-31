@@ -19,6 +19,7 @@ cd "$(git rev-parse --show-toplevel)"
 
 main() {
     which talosctl >/dev/null
+    which talhelper >/dev/null
 
     mkdir -p ./talos
 
