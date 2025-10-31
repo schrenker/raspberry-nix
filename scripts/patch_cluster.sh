@@ -23,11 +23,11 @@ main() {
     talosctl machineconfig patch ./talos/worker.yaml --patch @./configuration/raspberry.yaml --output ./talos/worker.yaml
 
     echo "MSG:: Applying configuration to Control Plane node"
-    talosctl apply-config --insecure --nodes "$CPLANE_IP" --file ./talos/controlplane.yaml
+    talosctl apply-config --nodes "$CPLANE_IP" --file ./talos/controlplane.yaml
 
     echo "MSG:: Applying configuration to Worker Nodes"
-    for ip in "${WORKER_IP[@]}"; do
-        talosctl apply-config --insecure --nodes "$ip" --file ./talos/worker.yaml
+    for ip in $WORKER_IP; do
+        talosctl apply-config --nodes "$ip" --file ./talos/worker.yaml
         echo "Configuration applied to $ip"
         echo ""
     done
