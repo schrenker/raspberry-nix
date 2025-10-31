@@ -34,6 +34,10 @@ main() {
     cat <<EOF >./.sops.yaml
 ---
 creation_rules:
+    - pgp: >-
+        AD3F941BA3E5F6DB!,
+        1821853A70B57CB8!
+      path_regex: "talos/.*"
     - age: >-
         $AGEKEY
       encrypted_suffix: Templates

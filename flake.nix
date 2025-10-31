@@ -9,6 +9,7 @@
             cilium-cli
             kube-capacity
             nil
+            talhelper
             talosctl
             yq-go
           ];
