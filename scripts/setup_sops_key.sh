@@ -9,7 +9,7 @@ if [[ "${TRACE-0}" == "1" ]]; then
 fi
 
 if [[ "${1-}" =~ ^-*h(elp)?$ ]]; then
-    echo 'Usage: ./setup-sops-key.sh
+    echo 'Usage: ./setup_sops_key.sh
 
 Setup sops encryption key on the cluster.
 1. If key exists on a cluster, reuse it
