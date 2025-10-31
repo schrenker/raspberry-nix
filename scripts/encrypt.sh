@@ -20,7 +20,7 @@ fi
 cd "$(git rev-parse --show-toplevel)"
 
 main() {
-    ./scripts/setup-sops-key.sh
+    ./scripts/setup_sops_key.sh
 
     sops --encrypt --in-place "$1"
 
