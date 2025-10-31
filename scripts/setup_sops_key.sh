@@ -33,6 +33,8 @@ main() {
     AGEKEY=$(grep 'public' ./keys.txt | awk '{print $4}')
     cat <<EOF >./.sops.yaml
 ---
+# This file is generated automatically, and will be overwritten
+# Please check setup_sops_key.sh script
 creation_rules:
     - pgp: >-
         AD3F941BA3E5F6DB!,
