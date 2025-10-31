@@ -7,7 +7,13 @@ machine:
   install:
     disk: /dev/mmcblk0
   time:
-    disabled: false # Indicates if the time service is disabled for the machine.
+    disabled: false
     servers:
       - 192.168.1.254
       - pool.ntp.org
+cluster:
+  network:
+    cni:
+      name: none
+  proxy:
+    disabled: true
