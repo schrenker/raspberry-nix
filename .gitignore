@@ -1,9 +1,6 @@
-/result
-/results/
 /.direnv/
 /.kube
-/secret/
 /workloads/*/*/charts
 /keys.txt
 /.sops.yaml
-/talos
+/configuration
