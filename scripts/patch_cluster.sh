@@ -22,6 +22,9 @@ main() {
     talosctl machineconfig patch ./talos/controlplane.yaml --patch @./configuration/raspberry.yaml --output ./talos/controlplane.yaml
     talosctl machineconfig patch ./talos/worker.yaml --patch @./configuration/raspberry.yaml --output ./talos/worker.yaml
 
+    yq e '(... | select(type == "!!seq")) |= unique' -i ./talos/controlplane.yaml
+    yq e '(... | select(type == "!!seq")) |= unique' -i ./talos/worker.yaml
+
     echo "MSG:: Applying configuration to Control Plane node"
     talosctl apply-config --nodes "$CPLANE_IP" --file ./talos/controlplane.yaml
 
