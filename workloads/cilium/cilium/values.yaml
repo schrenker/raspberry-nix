@@ -1,89 +1,100 @@
 cilium:
-  bpf:
-    vlanBypass:
-      - 0
+  cgroup:
+    autoMount:
+      enabled: false
+    hostRoot: /sys/fs/cgroup
+  securityContext:
+    capabilities:
+      ciliumAgent: [CHOWN, KILL, NET_ADMIN, NET_RAW, IPC_LOCK, SYS_ADMIN, SYS_RESOURCE, DAC_OVERRIDE, FOWNER, SETGID, SETUID]
+      cleanCiliumState: [NET_ADMIN, SYS_ADMIN, SYS_RESOURCE]
   cluster:
-    name: default
-  hubble:
-    relay:
-      enabled: false
-      resources:
-        requests:
-          cpu: 10m
-          memory: 100Mi
-        limits:
-          memory: 100Mi
-    ui:
-      enabled: false
-      backend:
-        resources:
-          requests:
-            cpu: 50m
-            memory: 100Mi
-          limits:
-            memory: 100Mi
-      frontend:
-        resources:
-          requests:
-            cpu: 50m
-            memory: 100Mi
-          limits:
-            memory: 100Mi
-  ipam:
-    operator:
-      clusterPoolIPv4PodCIDRList: 10.42.0.0/16
-  k8sServiceHost: 192.168.1.170
-  k8sServicePort: 6443
-  kubeProxyReplacement: true
-  operator:
-    replicas: 1
-    prometheus:
-      enabled: true
-    resources:
-      requests:
-        cpu: 50m
-        memory: 100Mi
-      limits:
-        memory: 100Mi
-  routingMode: tunnel
-  tunnelProtocol: vxlan
-  hostFirewall:
-    enabled: true
-  l2announcements:
-    enabled: true
+    name: raspberry
   gatewayAPI:
     enabled: true
-  devices:
-    - end0
-  prometheus:
-    enabled: true
+    enableAlpn: true
+    enableAlpnProtocol: true
+  ipam:
+    mode: kubernetes
+  k8sServiceHost: localhost
+  k8sServicePort: 7445
+  kubeProxyReplacement: true
+  # bpf:
+  #   vlanBypass:
+  #     - 0
 
-  initResources:
-    requests:
-      cpu: 10m
-      memory: 10Mi
-    limits:
-      memory: 10Mi
+  # operator:
+  #   replicas: 1
+  #   prometheus:
+  #     enabled: true
+  #   resources:
+  #     requests:
+  #       cpu: 50m
+  #       memory: 100Mi
+  #     limits:
+  #       memory: 100Mi
+  # routingMode: tunnel
+  # tunnelProtocol: vxlan
+  # hostFirewall:
+  #   enabled: true
+  # l2announcements:
+  #   enabled: true
+  # devices:
+  #   - end0
+  # prometheus:
+  #   enabled: true
 
-  resources:
-    requests:
-      cpu: 50m
-      memory: 200Mi
-    limits:
-      memory: 200Mi
+  # initResources:
+  #   requests:
+  #     cpu: 10m
+  #     memory: 10Mi
+  #   limits:
+  #     memory: 10Mi
 
-  cni:
-    resources:
-      requests:
-        cpu: 10m
-        memory: 100Mi
-      limits:
-        memory: 100Mi
+  # resources:
+  #   requests:
+  #     cpu: 50m
+  #     memory: 200Mi
+  #   limits:
+  #     memory: 200Mi
 
-  envoy:
-    resources:
-      requests:
-        cpu: 10m
-        memory: 100Mi
-      limits:
-        memory: 100Mi
+  # cni:
+  #   resources:
+  #     requests:
+  #       cpu: 10m
+  #       memory: 100Mi
+  #     limits:
+  #       memory: 100Mi
+
+  # envoy:
+  #   resources:
+  #     requests:
+  #       cpu: 10m
+  #       memory: 100Mi
+  #     limits:
+  #       memory: 100Mi
+
+  # hubble:
+  #   relay:
+  #     enabled: false
+  #     resources:
+  #       requests:
+  #         cpu: 10m
+  #         memory: 100Mi
+  #       limits:
+  #         memory: 100Mi
+  #   ui:
+  #     enabled: false
+  #     backend:
+  #       resources:
+  #         requests:
+  #           cpu: 50m
+  #           memory: 100Mi
+  #         limits:
+  #           memory: 100Mi
+  #     frontend:
+  #       resources:
+  #         requests:
+  #           cpu: 50m
+  #           memory: 100Mi
+  #         limits:
+  #           memory: 100Mi

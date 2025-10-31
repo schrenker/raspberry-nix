@@ -9,7 +9,7 @@ if [[ "${TRACE-0}" == "1" ]]; then
 fi
 
 if [[ "${1-}" =~ ^-*h(elp)?$ ]]; then
-    echo 'Usage: ./open-argo.sh
+    echo 'Usage: ./open_argo.sh
 Wait for argocd-server to come up, forward https to localhost:8080 and then open Safari browser tab pointing to it.
 '
     exit

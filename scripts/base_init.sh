@@ -9,7 +9,7 @@ if [[ "${TRACE-0}" == "1" ]]; then
 fi
 
 if [[ "${1-}" =~ ^-*h(elp)?$ ]]; then
-    echo 'Usage: ./init.sh
+    echo 'Usage: ./base_init.sh
 Bootstrap cluster:
 1 .Install cilium to the cluster
 2. Install argocd
@@ -23,8 +23,6 @@ fi
 cd "$(git rev-parse --show-toplevel)"
 
 main() {
-    ./scripts/pull-kubeconfig.sh
-
     helm repo add cilium https://helm.cilium.io
     helm dependency update workloads/cilium/cilium
     helm upgrade --install --create-namespace --namespace cilium cilium workloads/cilium/cilium

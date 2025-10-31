@@ -9,8 +9,8 @@ if [[ "${TRACE-0}" == "1" ]]; then
 fi
 
 if [[ "${1-}" =~ ^-*h(elp)?$ ]]; then
-    echo 'Usage: ./build-all-sd-aarch64.sh
-    Build all sd-aarch64 images based flake.nix.
+    echo 'Usage: ./pull_kubeconfig.sh
+    Pull kubeconfig file from talos-master.
 '
     exit
 fi
@@ -18,10 +18,11 @@ fi
 cd "$(git rev-parse --show-toplevel)"
 
 main() {
-    nix flake show --json | jq -r '.nixosConfigurations | keys.[]' | while read -r line; do
-        ./scripts/build-sd.sh "$line"
-    done
+    which talosctl >/dev/null
 
+    mkdir -p .kube
+    echo "MSG:: pulling kubeconfig"
+    talosctl kubeconfig ./kube/config --nodes "$CPLANE_IP"
 }
 
 main "$@"
