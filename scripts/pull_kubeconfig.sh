@@ -20,7 +20,7 @@ cd "$(git rev-parse --show-toplevel)"
 main() {
     which talosctl >/dev/null
 
-    mkdir -p .kube
+    mkdir -p generated
 
     talosctl kubeconfig ./generated/kubeconfig --nodes "$(yq -r '.nodes[] | select(.hostname == "talos-master") | .ipAddress' ./talos/talconfig.yaml)" --force
 }
