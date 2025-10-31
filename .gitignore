@@ -6,3 +6,4 @@
 /workloads/*/*/charts
 /keys.txt
 /.sops.yaml
+/talos
