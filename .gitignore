@@ -3,4 +3,4 @@
 /workloads/*/*/charts
 /keys.txt
 /.sops.yaml
-/configuration
+/generated

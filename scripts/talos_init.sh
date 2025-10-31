@@ -18,48 +18,41 @@ fi
 cd "$(git rev-parse --show-toplevel)"
 
 main() {
-    echo "Might not be needed, because of talhelper method."
-    echo "Please run patch_cluster.sh to find out on next cluster reinstantiation."
-    # which talosctl >/dev/null
-    # which talhelper >/dev/null
+    which talosctl >/dev/null
+    which talhelper >/dev/null
 
-    # mkdir -p ./talos
+    mkdir -p ./talos
 
-    # echo "MSG:: Generating talos secrets"
-    # talosctl gen secrets -o ./talos/secrets.yaml
+    if [[ ! -f ./talos/talsecret.sops.yaml ]]; then
+        echo "MSG:: Talsecret doesn't exist, generating and encrypting."
+        talhelper gensecret >./talos/talsecret.sops.yaml
+        ./scripts/encrypt.sh ./talos/talsecret.sops.yaml
+    fi
 
-    # echo "MSG:: Generating configuration"
-    # talosctl gen config -o ./talos --with-secrets ./talos/secrets.yaml "$CLUSTER_NAME" https://"$CPLANE_IP":6443
+    echo "MSG:: Generating machine configurations."
+    talhelper genconfig -c ./talos/talconfig.yaml -s ./talos/talsecret.sops.yaml -o generated/ --no-gitignore
 
-    # echo "MSG:: patching configuration files"
-    # talosctl machineconfig patch ./talos/controlplane.yaml --patch @./configuration/base.yaml --output ./talos/controlplane.yaml
-    # talosctl machineconfig patch ./talos/worker.yaml --patch @./configuration/base.yaml --output ./talos/worker.yaml
+    echo "MSG:: Applying machine configurations."
+    while read -r HOSTNAME IP_ADDRESS; do
+        talosctl apply-config --nodes "$IP_ADDRESS" --file ./generated/raspberry-"$HOSTNAME".yaml --insecure
+    done < <(yq -r '.nodes[] | .hostname + " " + .ipAddress' ./talos/talconfig.yaml)
 
-    # echo "MSG:: Removing duplicates from configuration files"
-    # yq e '(... | select(type == "!!seq")) |= unique' -i ./talos/controlplane.yaml
-    # yq e '(... | select(type == "!!seq")) |= unique' -i ./talos/worker.yaml
+    CPLANE_IP=$(yq -r '.nodes[] | select(.hostname == "talos-master") | .ipAddress' ./talos/talconfig.yaml)
 
-    # echo "MSG:: Applying configuration to Control Plane node"
-    # talosctl apply-config --insecure --nodes "$CPLANE_IP" --file ./talos/controlplane.yaml
+    echo "MSG:: Configuring endpoint"
+    talosctl config endpoint "$CPLANE_IP"
 
-    # echo "MSG:: Applying configuration to Worker Nodes"
-    # for ip in "${WORKER_IP[@]}"; do
-    #     talosctl apply-config --insecure --nodes "$ip" --file ./talos/worker.yaml
-    #     echo "Configuration applied to $ip"
-    #     echo ""
-    # done
+    echo "MSG:: Sleep for 3 minutes for NTP to catch up..."
+    sleep 180
 
-    # echo "MSG:: Configuring endpoint"
-    # talosctl config endpoint "$CPLANE_IP"
+    echo "MSG:: Bootstrapping cluster."
+    talosctl bootstrap --nodes "$CPLANE_IP"
 
-    # echo "MSG:: Sleep for 3 minutes for NTP to catch up..."
+    echo "MSG:: Pulling kubeconfig."
+    ./scripts/pull_kubeconfig.sh
 
-    # echo "MSG:: Bootstrapping cluster"
-    # talosctl bootstrap --nodes "$CPLANE_IP"
-
-    # ./scripts/pull_kubeconfig.sh
-
-    # ./scripts/base_init.sh
+    echo "MSG:: Installing base components."
+    ./scripts/base_init.sh
 
 }
 

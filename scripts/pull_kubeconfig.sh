@@ -21,9 +21,8 @@ main() {
     which talosctl >/dev/null
 
     mkdir -p .kube
-    echo "MSG:: pulling kubeconfig"
 
-    talosctl kubeconfig ./.kube/config --nodes "$CPLANE_IP" --force
+    talosctl kubeconfig ./generated/kubeconfig --nodes "$(yq -r '.nodes[] | select(.hostname == "talos-master") | .ipAddress' ./talos/talconfig.yaml)" --force
 }
 
 main "$@"

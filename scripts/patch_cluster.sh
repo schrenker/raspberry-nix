@@ -10,7 +10,7 @@ fi
 
 if [[ "${1-}" =~ ^-*h(elp)?$ ]]; then
     echo 'Usage: ./patch_cluster.sh
-    Patch cluster based on patch configuration/base.yaml file
+    Patch cluster based on talconfig.
 '
     exit
 fi
@@ -21,10 +21,10 @@ main() {
 
     which talhelper >/dev/null
 
-    talhelper genconfig -c talos/talconfig.yaml -s talos/talsecret.sops.yaml -o configuration/ --no-gitignore
+    talhelper genconfig -c talos/talconfig.yaml -s talos/talsecret.sops.yaml -o ./generated/ --no-gitignore
 
     while read -r HOSTNAME IP_ADDRESS; do
-        talosctl apply-config --nodes "$IP_ADDRESS" --file ./configuration/raspberry-"$HOSTNAME".yaml
+        talosctl apply-config --nodes "$IP_ADDRESS" --file ./generated/raspberry-"$HOSTNAME".yaml
     done < <(yq -r '.nodes[] | .hostname + " " + .ipAddress' ./talos/talconfig.yaml)
 }
 
