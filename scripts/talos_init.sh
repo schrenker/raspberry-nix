@@ -32,6 +32,10 @@ main() {
     talosctl machineconfig patch ./talos/controlplane.yaml --patch @./configuration/base.yaml --output ./talos/controlplane.yaml
     talosctl machineconfig patch ./talos/worker.yaml --patch @./configuration/base.yaml --output ./talos/worker.yaml
 
+    echo "MSG:: Removing duplicates from configuration files"
+    yq e '(... | select(type == "!!seq")) |= unique' -i ./talos/controlplane.yaml
+    yq e '(... | select(type == "!!seq")) |= unique' -i ./talos/worker.yaml
+
     echo "MSG:: Applying configuration to Control Plane node"
     talosctl apply-config --insecure --nodes "$CPLANE_IP" --file ./talos/controlplane.yaml
 
