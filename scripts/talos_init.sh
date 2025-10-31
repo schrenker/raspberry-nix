@@ -29,8 +29,8 @@ main() {
     talosctl gen config -o ./talos --with-secrets ./talos/secrets.yaml "$CLUSTER_NAME" https://"$CPLANE_IP":6443
 
     echo "MSG:: patching configuration files"
-    talosctl machineconfig patch ./talos/controlplane.yaml --patch @./configuration/raspberry.yaml --output ./talos/controlplane.yaml
-    talosctl machineconfig patch ./talos/worker.yaml --patch @./configuration/raspberry.yaml --output ./talos/worker.yaml
+    talosctl machineconfig patch ./talos/controlplane.yaml --patch @./configuration/base.yaml --output ./talos/controlplane.yaml
+    talosctl machineconfig patch ./talos/worker.yaml --patch @./configuration/base.yaml --output ./talos/worker.yaml
 
     echo "MSG:: Applying configuration to Control Plane node"
     talosctl apply-config --insecure --nodes "$CPLANE_IP" --file ./talos/controlplane.yaml

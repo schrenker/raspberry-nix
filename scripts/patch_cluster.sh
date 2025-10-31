@@ -10,7 +10,7 @@ fi
 
 if [[ "${1-}" =~ ^-*h(elp)?$ ]]; then
     echo 'Usage: ./patch_cluster.sh
-    Patch cluster based on patch configuration/raspberry.yaml file
+    Patch cluster based on patch configuration/base.yaml file
 '
     exit
 fi
@@ -19,9 +19,10 @@ cd "$(git rev-parse --show-toplevel)"
 
 main() {
     echo "MSG:: patching configuration files"
-    talosctl machineconfig patch ./talos/controlplane.yaml --patch @./configuration/raspberry.yaml --output ./talos/controlplane.yaml
-    talosctl machineconfig patch ./talos/worker.yaml --patch @./configuration/raspberry.yaml --output ./talos/worker.yaml
+    talosctl machineconfig patch ./talos/controlplane.yaml --patch @./configuration/base.yaml --output ./talos/controlplane.yaml
+    talosctl machineconfig patch ./talos/worker.yaml --patch @./configuration/base.yaml --output ./talos/worker.yaml
 
+    echo "MSG:: Removing duplicates from configuration files"
     yq e '(... | select(type == "!!seq")) |= unique' -i ./talos/controlplane.yaml
     yq e '(... | select(type == "!!seq")) |= unique' -i ./talos/worker.yaml
 

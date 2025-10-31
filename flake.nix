@@ -10,6 +10,7 @@
             kube-capacity
             nil
             talosctl
+            yq-go
           ];
         };
       };
