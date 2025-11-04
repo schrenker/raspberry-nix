@@ -11,8 +11,8 @@ spec:
   ingress:
     - #description: "Allow trusted cluster entities for Kubelet, Trustd, and CNI/VXLAN."
       fromEntities:
-        - host
         - cluster
+        - health
       toPorts:
         - ports:
             - port: "10250"
@@ -23,6 +23,8 @@ spec:
               protocol: TCP
             - port: "8472"
               protocol: UDP
+            - port: "4240"
+              protocol: TCP
 
     - #description: "Allow external access to K8s API and apid."
       # fromCIDRSet:
@@ -48,10 +50,3 @@ spec:
             - port: "2380"
               protocol: TCP
 
-    - #description: "health checks"
-      fromEntities:
-        - health
-      toPorts:
-        - ports:
-            - port: "4240"
-              protocol: TCP
