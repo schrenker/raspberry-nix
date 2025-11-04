@@ -1,0 +1,44 @@
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumClusterwideNetworkPolicy
+metadata:
+  name: "controlplane-firewall"
+spec:
+  nodeSelector:
+    matchLabels:
+      node-role.kubernetes.io/control-plane: ""
+
+  ingress:
+    - description: "Allow trusted cluster entities for Kubelet, Trustd, and CNI/VXLAN."
+      fromEntities:
+        - remote-node
+      toPorts:
+        - ports:
+            - port: "10250"
+              protocol: TCP
+            - port: "50001"
+              protocol: TCP
+            - port: "8472"
+              protocol: UDP
+
+    - description: "Allow external access to K8s API and apid."
+      fromCIDRSet:
+        - cidr: "0.0.0.0/0"
+        - cidr: "::/0"
+      toPorts:
+        - ports:
+            - port: "50000"
+              protocol: TCP
+            - port: "6443"
+              protocol: TCP
+
+    - description: "Allow etcd access only from Control Plane peers."
+      fromNodes:
+        - matchLabels:
+            node-role.kubernetes.io/control-plane: ""
+      toPorts:
+        - ports:
+            - port: "2379"
+              protocol: TCP
+            - port: "2380"
+              protocol: TCP
