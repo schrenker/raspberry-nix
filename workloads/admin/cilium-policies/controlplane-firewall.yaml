@@ -11,6 +11,7 @@ spec:
   ingress:
     - #description: "Allow trusted cluster entities for Kubelet, Trustd, and CNI/VXLAN."
       fromEntities:
+        - host
         - cluster
       toPorts:
         - ports:
