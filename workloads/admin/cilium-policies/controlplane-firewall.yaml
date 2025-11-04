@@ -46,3 +46,10 @@ spec:
               protocol: TCP
             - port: "2380"
               protocol: TCP
+
+    - #description: "health checks"
+      fromEntities:
+        - health
+      toPorts:
+        - port: "4240"
+          protocol: TCP
