@@ -18,7 +18,7 @@ spec:
               protocol: TCP
             - port: "50001"
               protocol: TCP
-            - port: "7443"
+            - port: "7445"
               protocol: TCP
             - port: "8472"
               protocol: UDP
