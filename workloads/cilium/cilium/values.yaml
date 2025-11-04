@@ -18,83 +18,81 @@ cilium:
   k8sServiceHost: localhost
   k8sServicePort: 7445
   kubeProxyReplacement: true
-  # bpf:
-  #   vlanBypass:
-  #     - 0
+  bpf:
+    vlanBypass:
+      - 0
 
-  # operator:
-  #   replicas: 1
-  #   prometheus:
-  #     enabled: true
-  #   resources:
-  #     requests:
-  #       cpu: 50m
-  #       memory: 100Mi
-  #     limits:
-  #       memory: 100Mi
-  # routingMode: tunnel
-  # tunnelProtocol: vxlan
-  # hostFirewall:
-  #   enabled: true
-  # l2announcements:
-  #   enabled: true
-  # devices:
-  #   - end0
-  # prometheus:
-  #   enabled: true
+  operator:
+    replicas: 1
+    prometheus:
+      enabled: true
+    resources:
+      requests:
+        cpu: 50m
+        memory: 100Mi
+      limits:
+        memory: 100Mi
+  hostFirewall:
+    enabled: true
+  l2announcements:
+    enabled: true
+  devices:
+    - end0
+  prometheus:
+    enabled: true
 
-  # initResources:
-  #   requests:
-  #     cpu: 10m
-  #     memory: 10Mi
-  #   limits:
-  #     memory: 10Mi
+  initResources:
+    requests:
+      cpu: 10m
+      memory: 10Mi
+    limits:
+      memory: 10Mi
 
-  # resources:
-  #   requests:
-  #     cpu: 50m
-  #     memory: 200Mi
-  #   limits:
-  #     memory: 200Mi
+  resources:
+    requests:
+      cpu: 50m
+      memory: 200Mi
+    limits:
+      memory: 200Mi
 
-  # cni:
-  #   resources:
-  #     requests:
-  #       cpu: 10m
-  #       memory: 100Mi
-  #     limits:
-  #       memory: 100Mi
+  cni:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+      limits:
+        memory: 100Mi
 
-  # envoy:
-  #   resources:
-  #     requests:
-  #       cpu: 10m
-  #       memory: 100Mi
-  #     limits:
-  #       memory: 100Mi
+  envoy:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 100Mi
+      limits:
+        memory: 100Mi
 
-  # hubble:
-  #   relay:
-  #     enabled: false
-  #     resources:
-  #       requests:
-  #         cpu: 10m
-  #         memory: 100Mi
-  #       limits:
-  #         memory: 100Mi
-  #   ui:
-  #     enabled: false
-  #     backend:
-  #       resources:
-  #         requests:
-  #           cpu: 50m
-  #           memory: 100Mi
-  #         limits:
-  #           memory: 100Mi
-  #     frontend:
-  #       resources:
-  #         requests:
-  #           cpu: 50m
-  #           memory: 100Mi
-  #         limits:
-  #           memory: 100Mi
+  hubble:
+    relay:
+      enabled: false
+      resources:
+        requests:
+          cpu: 10m
+          memory: 100Mi
+        limits:
+          memory: 100Mi
+    ui:
+      enabled: false
+      backend:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
+      frontend:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
