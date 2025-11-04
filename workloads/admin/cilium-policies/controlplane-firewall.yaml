@@ -11,7 +11,7 @@ spec:
   ingress:
     - #description: "Allow trusted cluster entities for Kubelet, Trustd, and CNI/VXLAN."
       fromEntities:
-        - remote-node
+        - cluster
       toPorts:
         - ports:
             - port: "10250"
