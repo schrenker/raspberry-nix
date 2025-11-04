@@ -21,6 +21,15 @@ cilium:
   bpf:
     vlanBypass:
       - 0
+  nodeSelectorLabels: true
+  hostFirewall:
+    enabled: true
+  l2announcements:
+    enabled: true
+  devices:
+    - end0
+  prometheus:
+    enabled: true
 
   operator:
     replicas: 1
@@ -32,14 +41,6 @@ cilium:
         memory: 100Mi
       limits:
         memory: 100Mi
-  hostFirewall:
-    enabled: true
-  l2announcements:
-    enabled: true
-  devices:
-    - end0
-  prometheus:
-    enabled: true
 
   initResources:
     requests:
