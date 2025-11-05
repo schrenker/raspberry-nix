@@ -18,10 +18,9 @@ fi
 cd "$(git rev-parse --show-toplevel)"
 
 main() {
+    which talosctl >/dev/null
 
-    which talhelper >/dev/null
-
-    talhelper genconfig -c talos/talconfig.yaml -s talos/talsecret.sops.yaml -o ./generated/ --no-gitignore
+    ./scripts/generate_talosconfig.sh
 
     while read -r HOSTNAME IP_ADDRESS; do
         talosctl apply-config --nodes "$IP_ADDRESS" --file ./generated/raspberry-"$HOSTNAME".yaml
