@@ -74,7 +74,7 @@ cilium:
 
   hubble:
     relay:
-      enabled: false
+      enabled: true
       resources:
         requests:
           cpu: 10m
@@ -82,7 +82,7 @@ cilium:
         limits:
           memory: 100Mi
     ui:
-      enabled: false
+      enabled: true
       backend:
         resources:
           requests:
