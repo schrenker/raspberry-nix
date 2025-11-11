@@ -88,12 +88,25 @@ k8s-monitoring:
 
   alloy-singleton:
     enabled: true
+    alloy:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          memory: 256Mi
 
   alloy-logs:
     enabled: true
     alloy:
       clustering:
         enabled: true
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          memory: 256Mi
 
   alloy-operator:
     deploy: true
