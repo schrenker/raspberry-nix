@@ -1,6 +1,5 @@
 ---
 victoria-metrics-k8s-stack:
-  argocdReleaseOverride: "$ARGOCD_APP_NAME"
   vmsingle:
     enabled: true
   alertmanager:
