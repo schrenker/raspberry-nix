@@ -1,0 +1,33 @@
+---
+victoria-metrics-k8s-stack:
+  argocdReleaseOverride: "$ARGOCD_APP_NAME"
+  vmsingle:
+    enabled: true
+  alertmanager:
+    enabled: false
+  vmalert:
+    enabled: false
+  vmagent:
+    enabled: false
+  grafana:
+    enabled: true
+  prometheus-node-exporter:
+    enabled: false
+  kube-state-metrics:
+    enabled: false
+  kubelet:
+    enabled: false
+  kubeApiServer:
+    enabled: false
+  kubeControllerManager:
+    enabled: false
+  kubeDns:
+    enabled: false
+  coreDns:
+    enabled: false
+  kubeEtcd:
+    enabled: false
+  kubeScheduler:
+    enabled: false
+  kubeProxy:
+    enabled: false
