@@ -30,6 +30,26 @@ k8s-monitoring:
 
   clusterMetrics:
     enabled: true
+    kepler:
+      enabled: false
+    windows-exporter:
+      enabled: false
+    opencost:
+      enabled: false
+    kube-state-metrics:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 64Mi
+        limits:
+          memory: 64Mi
+    node-exporter:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 50Mi
+        limits:
+          memory: 50Mi
 
   clusterEvents:
     enabled: true
@@ -61,8 +81,13 @@ k8s-monitoring:
         enabled: true
 
   alloy-operator:
-    deploy: true
-
+    deploy: false
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        memory: 128Mi
     waitForAlloyRemoval:
       resources:
         requests:
