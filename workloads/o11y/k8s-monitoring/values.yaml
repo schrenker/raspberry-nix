@@ -40,6 +40,14 @@ k8s-monitoring:
   annotationAutodiscovery:
     enabled: true
 
+  collectorCommon:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        memory: 256Mi
+
   alloy-metrics:
     enabled: true
 
