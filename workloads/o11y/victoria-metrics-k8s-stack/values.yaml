@@ -2,12 +2,13 @@
 victoria-metrics-k8s-stack:
   vmsingle:
     enabled: true
-    resources:
-      requests:
-        cpu: 200m
-        memory: 1Gi
-      limits:
-        memory: 1Gi
+    spec:
+      resources:
+        requests:
+          cpu: 200m
+          memory: 1Gi
+        limits:
+          memory: 1Gi
   alertmanager:
     enabled: false
   vmalert:
