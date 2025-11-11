@@ -42,3 +42,5 @@ victoria-metrics-k8s-stack:
     enabled: false
   kubeProxy:
     enabled: false
+  victoria-metrics-operator:
+    enabled: false
