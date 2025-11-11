@@ -43,4 +43,9 @@ victoria-metrics-k8s-stack:
   kubeProxy:
     enabled: false
   victoria-metrics-operator:
-    enabled: false
+    resources:
+      limits:
+        memory: 320Mi
+      requests:
+        cpu: 80m
+        memory: 320Mi
