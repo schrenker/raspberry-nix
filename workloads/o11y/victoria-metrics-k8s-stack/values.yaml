@@ -2,6 +2,12 @@
 victoria-metrics-k8s-stack:
   vmsingle:
     enabled: true
+    resources:
+      requests:
+        cpu: 200m
+        memory: 1Gi
+      limits:
+        memory: 1Gi
   alertmanager:
     enabled: false
   vmalert:
@@ -10,6 +16,12 @@ victoria-metrics-k8s-stack:
     enabled: false
   grafana:
     enabled: true
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        memory: 256Mi
   prometheus-node-exporter:
     enabled: false
   kube-state-metrics:

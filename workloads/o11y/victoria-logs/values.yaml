@@ -2,3 +2,9 @@
 victoria-logs-single:
   server:
     enabled: true
+    resources:
+      requests:
+        cpu: 500m
+        memory: 512Mi
+      limits:
+        memory: 512Mi
