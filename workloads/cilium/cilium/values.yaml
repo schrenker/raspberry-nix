@@ -38,6 +38,19 @@ cilium:
   devices:
     - end0
 
+  authentication:
+    mutual:
+      spire:
+        enabled: true
+        install:
+          enabled: true
+          server:
+            dataStorage:
+              enabled: false
+  encryption:
+    enabled: true
+    type: wireguard
+
   operator:
     replicas: 1
     prometheus:
