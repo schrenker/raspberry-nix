@@ -26,6 +26,15 @@ loki:
   test:
     enabled: false
 
+  gateway:
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+
   minio:
     enabled: true
 
