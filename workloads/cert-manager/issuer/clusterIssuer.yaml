@@ -1,0 +1,21 @@
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: cloudflare-cluster-issuer
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-staging-account-key
+    solvers:
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: cloudflare-api-token
+              key: api-token
+
+# To switch to production, change:
+# 1. `name:` to `cloudflare-prod-issuer`
+# 2. `server:` to `https://acme-v02.api.letsencrypt.org/directory`
+# 3. `privateKeySecretRef.name:` to `letsencrypt-prod-account-key`
