@@ -24,6 +24,16 @@ kube-prometheus-stack:
       finalizers:
         - kubernetes.io/pvc-protection
 
+  nodeExporter:
+    operatingSystems:
+      aix:
+        enabled: false
+      darwin:
+        enabled: false
+
+  prometheus-node-exporter:
+    namespaceOverride: kube-system
+
   alertmanager:
     enabled: false
 
