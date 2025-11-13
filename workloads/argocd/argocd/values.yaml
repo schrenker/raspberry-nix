@@ -53,11 +53,19 @@ argo-cd:
   redis:
     enabled: true
     resources:
-     limits:
-       memory: 64Mi
-     requests:
-       cpu: 100m
-       memory: 64Mi
+      limits:
+        memory: 64Mi
+      requests:
+        cpu: 100m
+        memory: 64Mi
+
+  redis-secret-init:
+    resources:
+      limits:
+        memory: 64Mi
+      requests:
+        cpu: 100m
+        memory: 64Mi
 
   redis-ha:
     enabled: false
