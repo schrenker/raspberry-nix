@@ -11,7 +11,7 @@ cilium:
     name: raspberry
 
   ingressController:
-    enabled: true
+    enabled: false
     loadbalancerMode: shared
   gatewayAPI:
     enabled: true

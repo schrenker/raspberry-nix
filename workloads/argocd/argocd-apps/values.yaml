@@ -1,3 +1,4 @@
+---
 argocd-apps:
   applicationsets:
     root:
@@ -10,7 +11,7 @@ argocd-apps:
             repoURL: 'https://github.com/schrenker/raspberry-talos.git'
             revision: HEAD
             directories:
-            - path: "workloads/**/*"
+              - path: "workloads/**/*"
       template:
         metadata:
           name: '{{ index .path.segments 2}}'
