@@ -20,7 +20,7 @@ k8s-monitoring:
     - name: victoriaLogs
       type: otlp
       protocol: http
-      url: http://victoria-logs-victoria-logs-single-server-0:9428/insert/opentelemetry
+      url: http://victoria-logs-victoria-logs-single-server:9428/insert/opentelemetry
       logs:
         enabled: true
       traces:
