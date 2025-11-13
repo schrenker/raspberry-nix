@@ -24,6 +24,28 @@ kube-prometheus-stack:
       finalizers:
         - kubernetes.io/pvc-protection
 
+    ingress:
+      enabled: true
+      ingressClassName: cilium
+
+      annotations: {}
+        # kubernetes.io/ingress.class: nginx
+        # kubernetes.io/tls-acme: "true"
+
+      ## Labels to be added to the Ingress
+      ##
+      labels: {}
+
+      hosts:
+        - grafana.zawadzki.tech
+
+      path: /
+
+      tls:
+        - secretName: grafana-tls
+          hosts:
+            - grafana.zawadzki.tech
+
   nodeExporter:
     operatingSystems:
       aix:
