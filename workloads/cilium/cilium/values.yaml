@@ -9,27 +9,34 @@ cilium:
       cleanCiliumState: [NET_ADMIN, SYS_ADMIN, SYS_RESOURCE]
   cluster:
     name: raspberry
+
+  ingressController:
+    enabled: true
+    loadbalancerMode: shared
   gatewayAPI:
     enabled: true
     enableAlpn: true
     enableAlpnProtocol: true
-  ipam:
-    mode: kubernetes
+
   k8sServiceHost: localhost
   k8sServicePort: 7445
+
+  prometheus:
+    enabled: true
+
   kubeProxyReplacement: true
+  nodeSelectorLabels: true
+  ipam:
+    mode: kubernetes
+  l2announcements:
+    enabled: true
   bpf:
     vlanBypass:
       - 0
-  nodeSelectorLabels: true
   hostFirewall:
-    enabled: true
-  l2announcements:
     enabled: true
   devices:
     - end0
-  prometheus:
-    enabled: true
 
   operator:
     replicas: 1
