@@ -59,7 +59,7 @@ argo-cd:
         cpu: 100m
         memory: 64Mi
 
-  redis-secret-init:
+  redisSecretInit:
     resources:
       limits:
         memory: 64Mi
