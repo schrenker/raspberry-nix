@@ -13,6 +13,8 @@ argo-cd:
           - CiliumIdentity
           clusters:
           - "*"
+    params:
+      server.insecure: "true"
 
 
   controller:
