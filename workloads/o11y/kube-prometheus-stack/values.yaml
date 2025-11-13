@@ -1,0 +1,31 @@
+---
+kube-prometheus-stack:
+  grafana:
+    enabled: true
+    adminUser: admin
+    admin:
+      existingSecret: "grafana-credentials"
+      userKey: admin-user
+      passwordKey: admin-password
+
+    grafana.ini:
+      analytics:
+        check_for_updates: false
+        reporting_enabled: false
+        check_for_plugins_updates: false
+
+    persistence:
+      enabled: true
+      type: sts
+      storageClassName: nfs-client
+      accessModes:
+        - ReadWriteOnce
+      size: 20Gi
+      finalizers:
+        - kubernetes.io/pvc-protection
+
+  alertmanager:
+    enabled: false
+
+  kubeProxy:
+    enabled: false
