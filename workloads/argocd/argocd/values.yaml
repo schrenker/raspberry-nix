@@ -1,3 +1,4 @@
+---
 argo-cd:
   configs:
     cm:
@@ -31,6 +32,18 @@ argo-cd:
       requests:
         cpu: 100m
         memory: 128Mi
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: cloudflare-cluster-issuer
+      ingressClassName: "traefik"
+      hostname: "argo.zawadzki.tech"
+      path: /
+      pathType: Prefix
+      extraTls:
+        - hosts:
+            - argo.zawadzki.tech
+          secretName: argo-tls
 
   repoServer:
     replicas: 1
