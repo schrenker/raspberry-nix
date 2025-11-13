@@ -39,3 +39,10 @@ metadata:
 spec:
   policyName: "enforce-resource-definition"
   validationActions: [Deny]
+  matchResources:
+    namespaceSelector:
+      matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+            - kube-system
