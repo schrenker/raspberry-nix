@@ -64,11 +64,10 @@ loki:
   sidecar:
     resources:
       limits:
-        cpu: 100m
         memory: 100Mi
       requests:
         cpu: 50m
-        memory: 50Mi
+        memory: 100Mi
 
   extraEnv:
     # Keep a little bit lower than memory limits
