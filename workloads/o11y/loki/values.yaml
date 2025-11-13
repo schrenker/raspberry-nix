@@ -20,6 +20,9 @@ loki:
     ruler:
       enable_api: true
 
+  lokiCanary:
+    enabled: false
+
   minio:
     enabled: true
 
